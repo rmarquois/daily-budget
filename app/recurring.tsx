@@ -12,6 +12,7 @@ import { useBudgetStore } from '@/lib/budget/store'
 import type { FlowType } from '@/lib/budget/types'
 import { amountToInput, parseAmount } from '@/lib/format'
 import { closeModal } from '@/lib/navigation'
+import { cn } from '@/lib/utils'
 
 const SUGGESTIONS: Record<FlowType, string[]> = {
   income: ['Salaire', 'Prime', 'Allocations', 'Loyer perçu', 'Pension'],
@@ -119,7 +120,7 @@ export default function RecurringScreen() {
         </Button>
         {existing ? (
           <Button variant="ghost" onPress={remove}>
-            <Text className="text-destructive">
+            <Text className={cn('text-destructive', confirmDelete ? 'font-bold' : undefined)}>
               {confirmDelete ? 'Confirmer la suppression' : 'Supprimer'}
             </Text>
           </Button>

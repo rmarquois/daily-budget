@@ -183,7 +183,7 @@ export default function TransactionScreen() {
         </Button>
         {existing ? (
           <Button variant="ghost" onPress={remove}>
-            <Text className="text-destructive">
+            <Text className={cn('text-destructive', confirmDelete ? 'font-bold' : undefined)}>
               {confirmDelete ? 'Confirmer la suppression' : 'Supprimer'}
             </Text>
           </Button>

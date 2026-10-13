@@ -17,7 +17,6 @@ export default function SettingsScreen() {
   const setPeriodStartDay = useBudgetStore((s) => s.setPeriodStartDay)
   const isDemo = useBudgetStore((s) => s.isDemo)
   const resetAll = useBudgetStore((s) => s.resetAll)
-  const { isDarkColorScheme } = useColorScheme()
   const [confirmReset, setConfirmReset] = React.useState(false)
 
   const reset = () => {
@@ -61,6 +60,7 @@ export default function SettingsScreen() {
                       : 'Tout effacer et recommencer'
                 }
                 destructive
+                confirm={confirmReset}
                 isLast
               />
             </Pressable>
@@ -84,12 +84,14 @@ function Row({
   label,
   children,
   destructive,
+  confirm,
   isLast = true,
 }: {
   icon: IconName
   label: string
   children?: React.ReactNode
   destructive?: boolean
+  confirm?: boolean
   isLast?: boolean
 }) {
   return (
@@ -104,7 +106,13 @@ function Row({
         size={18}
         className={destructive ? 'text-destructive' : 'text-muted-foreground'}
       />
-      <Text className={cn('flex-1 text-sm', destructive ? 'text-destructive' : 'text-foreground')}>
+      <Text
+        className={cn(
+          'flex-1 text-sm',
+          destructive ? 'text-destructive' : 'text-foreground',
+          confirm ? 'font-bold' : undefined
+        )}
+      >
         {label}
       </Text>
       {children}
