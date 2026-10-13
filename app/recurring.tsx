@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
@@ -62,7 +62,7 @@ export default function RecurringScreen() {
   }
 
   return (
-    <View className="bg-background h-vh-safe">
+    <View className="bg-background py-safe flex-1">
       <Stack.Screen
         options={{
           title: existing
@@ -72,67 +72,62 @@ export default function RecurringScreen() {
               : 'Dépense récurrente',
         }}
       />
-      <KeyboardAvoidingView
-        className="flex-1"
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      <ScrollView
+        contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
+        keyboardShouldPersistTaps="handled"
       >
-        <ScrollView
-          contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
-          keyboardShouldPersistTaps="handled"
-        >
-          <SegmentedControl
-            value={type}
-            onChange={setType}
-            options={[
-              { value: 'income', label: 'Revenu' },
-              { value: 'expense', label: 'Dépense fixe' },
-            ]}
+        <SegmentedControl
+          value={type}
+          onChange={setType}
+          options={[
+            { value: 'income', label: 'Revenu' },
+            { value: 'expense', label: 'Dépense fixe' },
+          ]}
+        />
+
+        <View className="py-8">
+          <AmountInput
+            value={amount}
+            onChangeText={setAmount}
+            autoFocus={!existing}
+            tone={type === 'income' ? 'success' : 'default'}
           />
-
-          <View className="py-8">
-            <AmountInput
-              value={amount}
-              onChangeText={setAmount}
-              autoFocus={!existing}
-              tone={type === 'income' ? 'success' : 'default'}
-            />
-            <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
-          </View>
-
-          <FieldLabel>Nom</FieldLabel>
-          <Input
-            value={label}
-            onChangeText={setLabel}
-            placeholder={type === 'income' ? 'Ex. Salaire' : 'Ex. Loyer'}
-            returnKeyType="done"
-            onSubmitEditing={save}
-          />
-          <View className="mt-3 flex-row flex-wrap gap-2">
-            {SUGGESTIONS[type].map((s) => (
-              <Pressable
-                key={s}
-                onPress={() => setLabel(s)}
-                className="bg-muted rounded-full px-3 py-1.5 active:opacity-70"
-              >
-                <Text className="text-muted-foreground text-xs">{s}</Text>
-              </Pressable>
-            ))}
-          </View>
-        </ScrollView>
-
-        <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
-          <Button size="lg" onPress={save} disabled={!canSave}>
-            <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
-          </Button>
-          {existing ? (
-            <Button variant="ghost" onPress={remove}>
-              <Text className="text-destructive">
-                {confirmDelete ? 'Confirmer la suppression' : 'Supprimer'}
-              </Text>
-            </Button>
-          ) : null}
+          <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
         </View>
-      </KeyboardAvoidingView>
+
+        <FieldLabel>Nom</FieldLabel>
+        <Input
+          value={label}
+          onChangeText={setLabel}
+          placeholder={type === 'income' ? 'Ex. Salaire' : 'Ex. Loyer'}
+          returnKeyType="done"
+          onSubmitEditing={save}
+        />
+        <View className="mt-3 flex-row flex-wrap gap-2">
+          {SUGGESTIONS[type].map((s) => (
+            <Pressable
+              key={s}
+              onPress={() => setLabel(s)}
+              className="bg-muted rounded-full px-3 py-1.5 active:opacity-70"
+            >
+              <Text className="text-muted-foreground text-xs">{s}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
+
+      <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
+        <Button size="lg" onPress={save} disabled={!canSave}>
+          <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
+        </Button>
+        {existing ? (
+          <Button variant="ghost" onPress={remove}>
+            <Text className="text-destructive">
+              {confirmDelete ? 'Confirmer la suppression' : 'Supprimer'}
+            </Text>
+          </Button>
+        ) : null}
+      </View>
     </View>
   )
 }

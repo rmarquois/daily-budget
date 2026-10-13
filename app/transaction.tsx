@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
@@ -65,135 +65,130 @@ export default function TransactionScreen() {
   const title = existing ? 'Modifier' : type === 'expense' ? 'Nouvelle dépense' : 'Nouvelle rentrée'
 
   return (
-    <View className="bg-background h-vh-safe">
+    <View className="bg-background py-safe flex-1">
       <Stack.Screen
         options={{
           title,
         }}
       />
-      <KeyboardAvoidingView
+      <ScrollView
         className="flex-1"
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
+        keyboardShouldPersistTaps="handled"
       >
-        <ScrollView
-          className="flex-1"
-          contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
-          keyboardShouldPersistTaps="handled"
-        >
-          <SegmentedControl
-            value={type}
-            onChange={changeType}
-            options={[
-              { value: 'expense', label: 'Dépense' },
-              { value: 'income', label: 'Rentrée d’argent' },
-            ]}
+        <SegmentedControl
+          value={type}
+          onChange={changeType}
+          options={[
+            { value: 'expense', label: 'Dépense' },
+            { value: 'income', label: 'Rentrée d’argent' },
+          ]}
+        />
+
+        <View className="py-8">
+          <AmountInput
+            value={amount}
+            onChangeText={setAmount}
+            autoFocus={!existing}
+            tone={type === 'income' ? 'success' : 'default'}
           />
+        </View>
 
-          <View className="py-8">
-            <AmountInput
-              value={amount}
-              onChangeText={setAmount}
-              autoFocus={!existing}
-              tone={type === 'income' ? 'success' : 'default'}
-            />
-          </View>
+        <FieldLabel>Description</FieldLabel>
+        <Input
+          value={label}
+          onChangeText={setLabel}
+          placeholder={type === 'expense' ? 'Ex. Boulangerie' : 'Ex. Vente Vinted'}
+          returnKeyType="done"
+          onSubmitEditing={save}
+        />
 
-          <FieldLabel>Description</FieldLabel>
-          <Input
-            value={label}
-            onChangeText={setLabel}
-            placeholder={type === 'expense' ? 'Ex. Boulangerie' : 'Ex. Vente Vinted'}
-            returnKeyType="done"
-            onSubmitEditing={save}
-          />
-
-          <View className="mt-6">
-            <FieldLabel>Catégorie</FieldLabel>
-            <View className="flex-row flex-wrap gap-2">
-              {categories.map((c) => {
-                const active = c.id === categoryId
-                return (
-                  <Pressable
-                    key={c.id}
-                    onPress={() => setCategoryId(c.id)}
+        <View className="mt-6">
+          <FieldLabel>Catégorie</FieldLabel>
+          <View className="flex-row flex-wrap gap-2">
+            {categories.map((c) => {
+              const active = c.id === categoryId
+              return (
+                <Pressable
+                  key={c.id}
+                  onPress={() => setCategoryId(c.id)}
+                  className={cn(
+                    'flex-row items-center gap-1.5 rounded-full border px-3 py-2',
+                    active
+                      ? 'border-primary bg-primary'
+                      : 'border-border bg-background active:bg-accent'
+                  )}
+                >
+                  <LucideIcon
+                    name={c.icon}
+                    size={14}
+                    className={active ? 'text-primary-foreground' : 'text-muted-foreground'}
+                  />
+                  <Text
                     className={cn(
-                      'flex-row items-center gap-1.5 rounded-full border px-3 py-2',
-                      active
-                        ? 'border-primary bg-primary'
-                        : 'border-border bg-background active:bg-accent'
+                      'text-sm',
+                      active ? 'text-primary-foreground font-medium' : 'text-foreground'
                     )}
                   >
-                    <LucideIcon
-                      name={c.icon}
-                      size={14}
-                      className={active ? 'text-primary-foreground' : 'text-muted-foreground'}
-                    />
-                    <Text
-                      className={cn(
-                        'text-sm',
-                        active ? 'text-primary-foreground font-medium' : 'text-foreground'
-                      )}
-                    >
-                      {c.label}
-                    </Text>
-                  </Pressable>
-                )
-              })}
-            </View>
-          </View>
-
-          <View className="mt-6">
-            <FieldLabel>Date</FieldLabel>
-            <View className="border-input h-12 flex-row items-center rounded-md border">
-              <Pressable
-                onPress={() => setDate((d) => addDays(d, -1))}
-                accessibilityLabel="Jour précédent"
-                className="active:bg-accent h-full w-12 items-center justify-center"
-              >
-                <LucideIcon name="ChevronLeft" size={18} className="text-foreground" />
-              </Pressable>
-              <Pressable onPress={() => setDate(today)} className="flex-1 items-center">
-                <Text className="text-foreground text-sm font-medium">
-                  {formatRelativeDay(date, today)}
-                </Text>
-                {date !== today ? (
-                  <Text className="text-muted-foreground text-[11px]">
-                    Toucher pour revenir à aujourd'hui
+                    {c.label}
                   </Text>
-                ) : null}
-              </Pressable>
-              <Pressable
-                onPress={() => setDate((d) => addDays(d, 1))}
-                accessibilityLabel="Jour suivant"
-                className="active:bg-accent h-full w-12 items-center justify-center"
-              >
-                <LucideIcon name="ChevronRight" size={18} className="text-foreground" />
-              </Pressable>
-            </View>
-            {date > today ? (
-              <View className="mt-2 flex flex-row items-center justify-center gap-2">
-                <LucideIcon name="Info" size={12} className="text-muted-foreground" />
-                <Text className="text-muted-foreground text-xs">
-                  Dépense prévue : elle sera déduite de ce jour-là.
-                </Text>
-              </View>
-            ) : null}
+                </Pressable>
+              )
+            })}
           </View>
-        </ScrollView>
+        </View>
 
-        <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
-          <Button size="lg" onPress={save} disabled={!parsed}>
-            <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
-          </Button>
-          {existing ? (
-            <Button variant="ghost" onPress={remove}>
-              <Text className="text-destructive">
-                {confirmDelete ? 'Confirmer la suppression' : 'Supprimer'}
+        <View className="mt-6">
+          <FieldLabel>Date</FieldLabel>
+          <View className="border-input h-12 flex-row items-center rounded-md border">
+            <Pressable
+              onPress={() => setDate((d) => addDays(d, -1))}
+              accessibilityLabel="Jour précédent"
+              className="active:bg-accent h-full w-12 items-center justify-center"
+            >
+              <LucideIcon name="ChevronLeft" size={18} className="text-foreground" />
+            </Pressable>
+            <Pressable onPress={() => setDate(today)} className="flex-1 items-center">
+              <Text className="text-foreground text-sm font-medium">
+                {formatRelativeDay(date, today)}
               </Text>
-            </Button>
+              {date !== today ? (
+                <Text className="text-muted-foreground text-[11px]">
+                  Toucher pour revenir à aujourd'hui
+                </Text>
+              ) : null}
+            </Pressable>
+            <Pressable
+              onPress={() => setDate((d) => addDays(d, 1))}
+              accessibilityLabel="Jour suivant"
+              className="active:bg-accent h-full w-12 items-center justify-center"
+            >
+              <LucideIcon name="ChevronRight" size={18} className="text-foreground" />
+            </Pressable>
+          </View>
+          {date > today ? (
+            <View className="mt-2 flex flex-row items-center justify-center gap-2">
+              <LucideIcon name="Info" size={12} className="text-muted-foreground" />
+              <Text className="text-muted-foreground text-xs">
+                Dépense prévue : elle sera déduite de ce jour-là.
+              </Text>
+            </View>
           ) : null}
         </View>
-      </KeyboardAvoidingView>
+      </ScrollView>
+
+      <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
+        <Button size="lg" onPress={save} disabled={!parsed}>
+          <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
+        </Button>
+        {existing ? (
+          <Button variant="ghost" onPress={remove}>
+            <Text className="text-destructive">
+              {confirmDelete ? 'Confirmer la suppression' : 'Supprimer'}
+            </Text>
+          </Button>
+        ) : null}
+      </View>
     </View>
   )
 }

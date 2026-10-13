@@ -14,7 +14,7 @@ import { Text } from '@/components/ui/text'
 
 export default function NotFoundScreen() {
   return (
-    <View className="bg-background h-vh-safe">
+    <View className="bg-background py-safe flex-1">
       <View className="flex-1 items-center justify-center px-6">
         <Card className="w-full max-w-sm">
           <CardHeader className="items-center">
