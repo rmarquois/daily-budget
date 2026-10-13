@@ -43,7 +43,7 @@ export default function OnboardingScreen() {
   if (current === 'welcome') {
     return (
       <View className="bg-background py-safe flex-1">
-        <View className="web:mx-auto web:w-full web:max-w-md flex-1 justify-between px-6 py-8">
+        <View className=" flex-1 justify-between px-6 py-8">
           <View className="flex-1 justify-center">
             <View className="bg-primary mb-8 h-14 w-14 items-center justify-center rounded-2xl">
               <LucideIcon name="Wallet" size={26} className="text-primary-foreground" />
@@ -89,7 +89,7 @@ export default function OnboardingScreen() {
 
   return (
     <View className="bg-background py-safe flex-1">
-      <View className="web:mx-auto web:w-full web:max-w-md flex-row items-center gap-3 px-5 pb-2 pt-3">
+      <View className=" flex-row items-center gap-3 px-5 pb-2 pt-3">
         <Pressable
           onPress={back}
           accessibilityLabel="Retour"
@@ -108,10 +108,7 @@ export default function OnboardingScreen() {
         <View className="w-10" />
       </View>
 
-      <ScrollView
-        contentContainerClassName="px-6 pb-6 pt-6 web:mx-auto web:w-full web:max-w-md"
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerClassName="px-6 pb-6 pt-6 " keyboardShouldPersistTaps="handled">
         {current === 'period' ? (
           <>
             <StepTitle
@@ -208,7 +205,7 @@ export default function OnboardingScreen() {
         ) : null}
       </ScrollView>
 
-      <View className="web:mx-auto web:w-full web:max-w-md px-6 pb-4 pt-2">
+      <View className=" px-6 pb-4 pt-2">
         {current === 'recap' ? (
           <Button size="lg" onPress={finish}>
             <Text>C'est parti</Text>

@@ -73,7 +73,7 @@ export default function TransactionScreen() {
       />
       <ScrollView
         className="flex-1"
-        contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
+        contentContainerClassName="px-5 pb-6 pt-4"
         keyboardShouldPersistTaps="handled"
       >
         <SegmentedControl
@@ -177,7 +177,7 @@ export default function TransactionScreen() {
         </View>
       </ScrollView>
 
-      <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
+      <View className="border-border gap-2 border-t px-5 pb-3 pt-3">
         <Button size="lg" onPress={save} disabled={!parsed}>
           <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
         </Button>

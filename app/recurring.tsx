@@ -72,10 +72,7 @@ export default function RecurringScreen() {
               : 'Dépense récurrente',
         }}
       />
-      <ScrollView
-        contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerClassName="px-5 pb-6 pt-4" keyboardShouldPersistTaps="handled">
         <SegmentedControl
           value={type}
           onChange={setType}
@@ -116,7 +113,7 @@ export default function RecurringScreen() {
         </View>
       </ScrollView>
 
-      <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
+      <View className="border-border gap-2 border-t px-5 pb-3 pt-3">
         <Button size="lg" onPress={save} disabled={!canSave}>
           <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
         </Button>
