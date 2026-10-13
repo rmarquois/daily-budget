@@ -27,7 +27,7 @@ function Menubar({
   return (
     <MenubarPrimitive.Root
       className={cn(
-        'native:h-12 flex h-10 flex-row items-center space-x-1 rounded-md border border-border bg-background p-1',
+        'native:h-12 border-border bg-background flex h-10 flex-row items-center space-x-1 rounded-md border p-1',
         className
       )}
       {...props}
@@ -47,7 +47,7 @@ function MenubarTrigger({
   return (
     <MenubarPrimitive.Trigger
       className={cn(
-        'native:h-10 native:px-5 native:py-0 text-caption flex flex-row items-center rounded-sm px-3 py-1.5 active:bg-accent web:cursor-default web:select-none web:outline-none web:focus:bg-accent web:focus:text-accent-foreground',
+        'native:h-10 native:px-5 native:py-0 text-caption active:bg-accent web:cursor-default web:select-none web:outline-none web:focus:bg-accent web:focus:text-accent-foreground flex flex-row items-center rounded-sm px-3 py-1.5',
         value === itemValue && 'bg-accent text-accent-foreground',
         className
       )}
@@ -78,7 +78,7 @@ function MenubarSubTrigger({
     >
       <MenubarPrimitive.SubTrigger
         className={cn(
-          'native:py-2 flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent web:cursor-default web:select-none web:outline-none web:hover:bg-accent web:focus:bg-accent',
+          'native:py-2 active:bg-accent web:cursor-default web:select-none web:outline-none web:hover:bg-accent web:focus:bg-accent flex flex-row items-center gap-2 rounded-sm px-2 py-1.5',
           open && 'bg-accent',
           inset && 'pl-8',
           className
@@ -86,7 +86,7 @@ function MenubarSubTrigger({
         {...props}
       >
         {children}
-        <LucideIcon name={iconName} size={18} className="ml-auto text-foreground" />
+        <LucideIcon name={iconName} size={18} className="text-foreground ml-auto" />
       </MenubarPrimitive.SubTrigger>
     </TextClassContext.Provider>
   )
@@ -102,7 +102,7 @@ function MenubarSubContent({
   return (
     <MenubarPrimitive.SubContent
       className={cn(
-        'z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+        'border-border bg-popover data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 mt-1 min-w-32 overflow-hidden rounded-md border p-1 shadow-md shadow-neutral-50',
         open
           ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
           : 'web:animate-out web:fade-out-0 web:zoom-out ',
@@ -129,7 +129,7 @@ function MenubarContent({
     <MenubarPrimitive.Portal container={container} hostName={portalHost}>
       <MenubarPrimitive.Content
         className={cn(
-          'z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5',
+          'border-border bg-popover z-50 min-w-32 overflow-hidden rounded-md border p-1 shadow-md shadow-neutral-50',
           value === itemValue
             ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
             : 'web:animate-out web:fade-out-0 web:zoom-out-95',
@@ -154,9 +154,9 @@ function MenubarItem({
     <TextClassContext.Provider value="select-none text-sm native:text-lg text-popover-foreground web:group-focus:text-accent-foreground">
       <MenubarPrimitive.Item
         className={cn(
-          'native:py-2 group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent web:cursor-default web:outline-none web:hover:bg-accent web:focus:bg-accent',
+          'native:py-2 active:bg-accent web:cursor-default web:outline-none web:hover:bg-accent web:focus:bg-accent group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5',
           inset && 'pl-8',
-          props.disabled && 'opacity-50 web:pointer-events-none',
+          props.disabled && 'web:pointer-events-none opacity-50',
           className
         )}
         {...props}
@@ -177,8 +177,8 @@ function MenubarCheckboxItem({
   return (
     <MenubarPrimitive.CheckboxItem
       className={cn(
-        'web:group native:py-2 relative flex flex-row items-center rounded-sm py-1.5 pl-8 pr-2 active:bg-accent web:cursor-default web:outline-none web:focus:bg-accent',
-        props.disabled && 'opacity-50 web:pointer-events-none',
+        'web:group native:py-2 active:bg-accent web:cursor-default web:outline-none web:focus:bg-accent relative flex flex-row items-center rounded-sm py-1.5 pl-8 pr-2',
+        props.disabled && 'web:pointer-events-none opacity-50',
         className
       )}
       checked={checked}
@@ -205,15 +205,15 @@ function MenubarRadioItem({
   return (
     <MenubarPrimitive.RadioItem
       className={cn(
-        'web:group native:py-2 relative flex flex-row items-center rounded-sm py-1.5 pl-8 pr-2 active:bg-accent web:cursor-default web:outline-none web:focus:bg-accent',
-        props.disabled && 'opacity-50 web:pointer-events-none',
+        'web:group native:py-2 active:bg-accent web:cursor-default web:outline-none web:focus:bg-accent relative flex flex-row items-center rounded-sm py-1.5 pl-8 pr-2',
+        props.disabled && 'web:pointer-events-none opacity-50',
         className
       )}
       {...props}
     >
       <View className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
         <MenubarPrimitive.ItemIndicator>
-          <View className="h-2 w-2 rounded-full bg-foreground" />
+          <View className="bg-foreground h-2 w-2 rounded-full" />
         </MenubarPrimitive.ItemIndicator>
       </View>
       {children}
@@ -233,7 +233,7 @@ function MenubarLabel({
   return (
     <MenubarPrimitive.Label
       className={cn(
-        'text-caption px-2 py-1.5 text-foreground web:cursor-default',
+        'text-caption text-foreground web:cursor-default px-2 py-1.5',
         inset && 'pl-8',
         className
       )}
@@ -249,7 +249,7 @@ function MenubarSeparator({
   ref?: React.RefObject<MenubarPrimitive.SeparatorRef>
 }) {
   return (
-    <MenubarPrimitive.Separator className={cn('-mx-1 my-1 h-px bg-border', className)} {...props} />
+    <MenubarPrimitive.Separator className={cn('bg-border -mx-1 my-1 h-px', className)} {...props} />
   )
 }
 
@@ -257,7 +257,7 @@ function MenubarShortcut({ className, ...props }: TextProps) {
   return (
     <Text
       className={cn(
-        'native:text-sm text-caption ml-auto tracking-widest text-muted-foreground',
+        'native:text-sm text-caption text-muted-foreground ml-auto tracking-widest',
         className
       )}
       {...props}

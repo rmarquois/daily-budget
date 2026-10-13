@@ -15,7 +15,7 @@ import { Text } from '@/components/ui/text'
 
 export default function NotFoundScreen() {
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="bg-background flex-1">
       <View className="flex-1 items-center justify-center px-6">
         <Card className="w-full max-w-sm">
           <CardHeader className="items-center">
@@ -25,7 +25,7 @@ export default function NotFoundScreen() {
             </CardDescription>
           </CardHeader>
           <CardContent className="items-center">
-            <Text className="text-caption text-center text-muted-foreground">
+            <Text className="text-caption text-muted-foreground text-center">
               Your page may have moved or may not exist yet for this version of the app.
             </Text>
           </CardContent>

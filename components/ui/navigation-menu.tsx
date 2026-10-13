@@ -44,7 +44,7 @@ function NavigationMenuList({
   return (
     <NavigationMenuPrimitive.List
       className={cn(
-        'web:group flex flex-1 flex-row items-center justify-center gap-1 web:list-none',
+        'web:group web:list-none flex flex-1 flex-row items-center justify-center gap-1',
         className
       )}
       {...props}
@@ -92,7 +92,7 @@ function NavigationMenuTrigger({
         <LucideIcon
           name="ChevronDown"
           size={12}
-          className={cn('relative h-3 w-3 text-foreground web:transition web:duration-200')}
+          className={cn('text-foreground web:transition web:duration-200 relative h-3 w-3')}
           aria-hidden={true}
         />
       </Animated.View>
@@ -147,7 +147,7 @@ function NavigationMenuViewport({
     <View className={cn('absolute left-0 top-full flex justify-center')}>
       <View
         className={cn(
-          'web:origin-top-center relative mt-1.5 w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-lg web:h-[var(--radix-navigation-menu-viewport-height)] web:animate-in web:zoom-in-90',
+          'web:origin-top-center border-border bg-popover text-popover-foreground web:h-(--radix-navigation-menu-viewport-height) web:animate-in web:zoom-in-90 relative mt-1.5 w-full overflow-hidden rounded-md border shadow-lg',
           className
         )}
         {...props}
@@ -172,13 +172,13 @@ function NavigationMenuIndicator({
     <NavigationMenuPrimitive.Indicator
       ref={ref}
       className={cn(
-        'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden',
+        'z-1 top-full flex h-1.5 items-end justify-center overflow-hidden',
         value === itemValue ? 'web:animate-in web:fade-in' : 'web:animate-out web:fade-out',
         className
       )}
       {...props}
     >
-      <View className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md shadow-foreground/5" />
+      <View className="bg-border relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm shadow-md shadow-neutral-50" />
     </NavigationMenuPrimitive.Indicator>
   )
 }

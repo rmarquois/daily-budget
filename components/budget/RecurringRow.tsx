@@ -20,8 +20,8 @@ export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowPr
       onPress={onPress}
       disabled={!onPress}
       className={cn(
-        'flex-row items-center gap-3 px-4 py-3 active:bg-accent web:hover:bg-accent/60',
-        !isLast && 'border-b border-border'
+        'active:bg-accent web:hover:bg-accent/60 flex-row items-center gap-3 px-4 py-3',
+        !isLast && 'border-border border-b'
       )}
     >
       <View
@@ -36,7 +36,7 @@ export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowPr
           className={isIncome ? 'text-success' : 'text-muted-foreground'}
         />
       </View>
-      <Text className="flex-1 text-sm font-medium text-foreground" numberOfLines={1}>
+      <Text className="text-foreground flex-1 text-sm font-medium" numberOfLines={1}>
         {item.label}
       </Text>
       <Text className={cn('text-sm font-semibold', isIncome ? 'text-success' : 'text-foreground')}>
@@ -47,7 +47,7 @@ export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowPr
         <Pressable
           onPress={onRemove}
           accessibilityLabel={`Supprimer ${item.label}`}
-          className="-mr-2 h-8 w-8 items-center justify-center rounded-md active:bg-accent"
+          className="active:bg-accent -mr-2 h-8 w-8 items-center justify-center rounded-md"
         >
           <LucideIcon name="X" size={16} className="text-muted-foreground" />
         </Pressable>

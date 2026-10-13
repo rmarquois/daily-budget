@@ -23,7 +23,7 @@ function Label({
     >
       <LabelPrimitive.Text
         className={cn(
-          'text-caption leading-none text-foreground web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70',
+          'text-caption text-foreground web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70 leading-none',
           className
         )}
         {...props}

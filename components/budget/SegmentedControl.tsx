@@ -20,7 +20,7 @@ export function SegmentedControl<T extends string>({
   onChange,
 }: SegmentedControlProps<T>) {
   return (
-    <View className="flex-row rounded-lg bg-muted p-1">
+    <View className="bg-muted flex-row rounded-lg p-1">
       {options.map((o) => {
         const active = o.value === value
         return (
@@ -29,7 +29,7 @@ export function SegmentedControl<T extends string>({
             onPress={() => onChange(o.value)}
             className={cn(
               'h-9 flex-1 items-center justify-center rounded-md',
-              active && 'bg-background shadow-sm shadow-foreground/10'
+              active && 'bg-background shadow-sm'
             )}
           >
             <Text

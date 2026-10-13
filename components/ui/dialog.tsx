@@ -26,7 +26,7 @@ function DialogOverlayWeb({
   return (
     <DialogPrimitive.Overlay
       className={cn(
-        'absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-overlay/80 p-2',
+        'bg-overlay/80 absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center p-2',
         open ? 'web:animate-in web:fade-in-0' : 'web:animate-out web:fade-out-0',
         className
       )}
@@ -46,7 +46,7 @@ function DialogOverlayNative({
   return (
     <DialogPrimitive.Overlay
       style={StyleSheet.absoluteFill}
-      className={cn('flex items-center justify-center bg-overlay/80 p-2', className)}
+      className={cn('bg-overlay/80 flex items-center justify-center p-2', className)}
       {...props}
     >
       <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(150)}>
@@ -79,7 +79,7 @@ function DialogContent({
       <DialogOverlay>
         <DialogPrimitive.Content
           className={cn(
-            'max-w-lg gap-4 rounded-lg border border-border bg-background p-6 shadow-lg web:cursor-default web:duration-200',
+            'border-border bg-background web:cursor-default web:duration-200 max-w-lg gap-4 rounded-lg border p-6 shadow-lg',
             open
               ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
               : 'web:animate-out web:fade-out-0 web:zoom-out-95',
@@ -90,7 +90,7 @@ function DialogContent({
           {children}
           <DialogPrimitive.Close
             className={
-              'web:group absolute right-4 top-4 rounded-sm p-0.5 opacity-70 web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none'
+              'web:group web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none absolute right-4 top-4 rounded-sm p-0.5 opacity-70'
             }
           >
             <LucideIcon
@@ -129,7 +129,7 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       className={cn(
-        'native:text-xl text-h4 leading-none tracking-tight text-foreground',
+        'native:text-xl text-h4 text-foreground leading-none tracking-tight',
         className
       )}
       {...props}

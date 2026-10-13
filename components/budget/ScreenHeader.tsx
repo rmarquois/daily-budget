@@ -14,11 +14,11 @@ export function ScreenHeader({ eyebrow, title, right }: ScreenHeaderProps) {
     <View className="flex-row items-end justify-between px-5 pb-4 pt-3">
       <View className="flex-1">
         {eyebrow ? (
-          <Text className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <Text className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wider">
             {eyebrow}
           </Text>
         ) : null}
-        <Text className="text-h2 tracking-tight text-foreground">{title}</Text>
+        <Text className="text-h2 text-foreground tracking-tight">{title}</Text>
       </View>
       {right}
     </View>

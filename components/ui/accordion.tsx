@@ -45,7 +45,7 @@ function AccordionItem({
   return (
     <Animated.View className={'overflow-hidden'} layout={LinearTransition.duration(200)}>
       <AccordionPrimitive.Item
-        className={cn('border-b border-border', className)}
+        className={cn('border-border border-b', className)}
         value={value}
         {...props}
       />
@@ -79,13 +79,13 @@ function AccordionTrigger({
         <AccordionPrimitive.Trigger {...props} asChild>
           <Trigger
             className={cn(
-              'group flex flex-row items-center justify-between py-4 web:flex-1 web:transition-all web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground',
+              'web:flex-1 web:transition-all web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-muted-foreground group flex flex-row items-center justify-between py-4',
               className
             )}
           >
             {children}
             <Animated.View style={chevronStyle}>
-              <LucideIcon name="ChevronDown" size={18} className={'shrink-0 text-foreground'} />
+              <LucideIcon name="ChevronDown" size={18} className={'text-foreground shrink-0'} />
             </Animated.View>
           </Trigger>
         </AccordionPrimitive.Trigger>
@@ -106,7 +106,7 @@ function AccordionContent({
     <TextClassContext.Provider value="native:text-lg">
       <AccordionPrimitive.Content
         className={cn(
-          'overflow-hidden text-sm web:transition-all',
+          'web:transition-all overflow-hidden text-sm',
           isExpanded ? 'web:animate-accordion-down' : 'web:animate-accordion-up'
         )}
         {...props}

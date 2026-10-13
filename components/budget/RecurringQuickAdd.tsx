@@ -37,7 +37,7 @@ export function RecurringQuickAdd({ type, suggestions, onAdd }: RecurringQuickAd
           onChangeText={setLabel}
           placeholder={type === 'income' ? 'Ex. Salaire' : 'Ex. Loyer'}
         />
-        <View className="w-28 flex-row items-center rounded-md border border-input pr-3">
+        <View className="border-input w-28 flex-row items-center rounded-md border pr-3">
           <Input
             className="flex-1 border-0 text-right"
             value={amount}
@@ -47,7 +47,7 @@ export function RecurringQuickAdd({ type, suggestions, onAdd }: RecurringQuickAd
             inputMode="decimal"
             onSubmitEditing={submit}
           />
-          <Text className="text-sm text-muted-foreground">€</Text>
+          <Text className="text-muted-foreground text-sm">€</Text>
         </View>
         <Button size="icon" onPress={submit} disabled={!canAdd} accessibilityLabel="Ajouter">
           <LucideIcon name="Plus" size={18} className="text-primary-foreground" />
@@ -58,9 +58,9 @@ export function RecurringQuickAdd({ type, suggestions, onAdd }: RecurringQuickAd
           <Pressable
             key={s}
             onPress={() => setLabel(s)}
-            className="rounded-full bg-muted px-3 py-1.5 active:opacity-70"
+            className="bg-muted rounded-full px-3 py-1.5 active:opacity-70"
           >
-            <Text className="text-xs text-muted-foreground">{s}</Text>
+            <Text className="text-muted-foreground text-xs">{s}</Text>
           </Pressable>
         ))}
       </View>

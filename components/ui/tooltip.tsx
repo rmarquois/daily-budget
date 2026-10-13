@@ -33,7 +33,7 @@ function TooltipContent({
             <TooltipPrimitive.Content
               sideOffset={sideOffset}
               className={cn(
-                'z-50 overflow-hidden rounded-md border border-border bg-popover px-3 py-1.5 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 web:animate-in web:fade-in-0 web:zoom-in-95',
+                'border-border bg-popover data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 web:animate-in web:fade-in-0 web:zoom-in-95 z-50 overflow-hidden rounded-md border px-3 py-1.5 shadow-md shadow-neutral-50',
                 className
               )}
               {...props}

@@ -50,22 +50,22 @@ export default function HistoryScreen() {
   }, [transactions, period.start, period.end])
 
   return (
-    <SafeAreaView edges={['top']} className="flex-1 bg-background">
+    <SafeAreaView edges={['top']} className="bg-background flex-1">
       <ScreenHeader eyebrow="Vos opérations" title="Historique" right={<DemoBadge />} />
 
-      <View className="mx-5 mb-2 flex-row items-center rounded-xl border border-border p-1.5">
+      <View className="border-border mx-5 mb-2 flex-row items-center rounded-xl border p-1.5">
         <Pressable
           onPress={() => setAnchor(addDays(period.start, -1))}
           accessibilityLabel="Période précédente"
-          className="h-10 w-10 items-center justify-center rounded-lg active:bg-accent"
+          className="active:bg-accent h-10 w-10 items-center justify-center rounded-lg"
         >
           <LucideIcon name="ChevronLeft" size={18} className="text-foreground" />
         </Pressable>
         <Pressable onPress={() => setAnchor(today)} className="flex-1 items-center">
-          <Text className="text-sm font-semibold text-foreground">
+          <Text className="text-foreground text-sm font-semibold">
             {formatShortDay(period.start)} – {formatShortDay(period.end)}
           </Text>
-          <Text className="text-xs text-muted-foreground">
+          <Text className="text-muted-foreground text-xs">
             {isCurrent ? 'Période en cours' : 'Toucher pour revenir à aujourd’hui'} ·{' '}
             {formatMoney(total)}
           </Text>
@@ -73,7 +73,7 @@ export default function HistoryScreen() {
         <Pressable
           onPress={() => setAnchor(addDays(period.end, 1))}
           accessibilityLabel="Période suivante"
-          className="h-10 w-10 items-center justify-center rounded-lg active:bg-accent"
+          className="active:bg-accent h-10 w-10 items-center justify-center rounded-lg"
         >
           <LucideIcon name="ChevronRight" size={18} className="text-foreground" />
         </Pressable>
@@ -86,10 +86,10 @@ export default function HistoryScreen() {
         contentContainerStyle={styles.content}
         renderSectionHeader={({ section }) => (
           <View className="mb-2 mt-5 flex-row items-center justify-between px-1">
-            <Text className="text-sm font-semibold text-foreground">
+            <Text className="text-foreground text-sm font-semibold">
               {formatRelativeDay(section.day, today)}
             </Text>
-            <Text className="text-xs text-muted-foreground">
+            <Text className="text-muted-foreground text-xs">
               {section.net >= 0 ? '−' : '+'}
               {formatMoney(Math.abs(section.net))}
             </Text>
@@ -98,7 +98,7 @@ export default function HistoryScreen() {
         renderItem={({ item, index, section }) => (
           <View
             className={cn(
-              'overflow-hidden border-x border-border bg-card',
+              'border-border bg-card overflow-hidden border-x',
               index === 0 && 'rounded-t-lg border-t',
               index === section.data.length - 1 && 'rounded-b-lg border-b'
             )}
@@ -112,11 +112,11 @@ export default function HistoryScreen() {
         )}
         ListEmptyComponent={
           <View className="items-center px-8 py-16">
-            <View className="mb-3 h-12 w-12 items-center justify-center rounded-full bg-muted">
+            <View className="bg-muted mb-3 h-12 w-12 items-center justify-center rounded-full">
               <LucideIcon name="Inbox" size={22} className="text-muted-foreground" />
             </View>
-            <Text className="text-sm font-medium text-foreground">Aucune opération</Text>
-            <Text className="mt-1 text-center text-xs text-muted-foreground">
+            <Text className="text-foreground text-sm font-medium">Aucune opération</Text>
+            <Text className="text-muted-foreground mt-1 text-center text-xs">
               Les dépenses que vous notez sur cette période apparaîtront ici.
             </Text>
           </View>

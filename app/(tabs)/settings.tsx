@@ -32,14 +32,14 @@ export default function SettingsScreen() {
   }
 
   return (
-    <SafeAreaView edges={['top']} className="flex-1 bg-background">
+    <SafeAreaView edges={['top']} className="bg-background flex-1">
       <ScrollView contentContainerClassName="pb-10" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow="Préférences" title="Réglages" />
 
         <View className="px-5">
           <SectionTitle title="Période budgétaire" />
           <Card className="p-4">
-            <Text className="mb-4 text-xs leading-5 text-muted-foreground">
+            <Text className="text-muted-foreground mb-4 text-xs leading-5">
               Choisissez le jour où votre mois redémarre, par exemple le jour où tombe votre salaire
               (du 25 au 25, du 30 au 30…).
             </Text>
@@ -49,12 +49,12 @@ export default function SettingsScreen() {
           <SectionTitle title="Apparence" />
           <Card className="overflow-hidden">
             <Row icon={isDarkColorScheme ? 'MoonStar' : 'Sun'} label="Thème">
-              <Text className="text-sm text-muted-foreground">
+              <Text className="text-muted-foreground text-sm">
                 Automatique · {isDarkColorScheme ? 'Sombre' : 'Clair'}
               </Text>
             </Row>
           </Card>
-          <Text className="mt-2 px-1 text-xs leading-5 text-muted-foreground">
+          <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
             L’app passe en clair ou en sombre selon le réglage de votre appareil.
           </Text>
 
@@ -78,12 +78,12 @@ export default function SettingsScreen() {
               />
             </Pressable>
           </Card>
-          <Text className="mt-2 px-1 text-xs leading-5 text-muted-foreground">
+          <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
             Vos données restent sur votre téléphone (ou dans ce navigateur). Elles ne sont pas
             synchronisées entre appareils.
           </Text>
 
-          <Text className="mt-10 text-center text-xs text-muted-foreground">
+          <Text className="text-muted-foreground mt-10 text-center text-xs">
             Daily Budget · v1.0
           </Text>
         </View>
@@ -109,7 +109,7 @@ function Row({
     <View
       className={cn(
         'min-h-[52px] flex-row items-center gap-3 px-4 py-3',
-        !isLast && 'border-b border-border'
+        !isLast && 'border-border border-b'
       )}
     >
       <LucideIcon

@@ -28,14 +28,14 @@ export function ProgressBar({
 }: ProgressBarProps) {
   const pct = Math.min(1, Math.max(0, value)) * 100
   return (
-    <View className={cn('h-2 w-full overflow-hidden rounded-full bg-muted', className)}>
+    <View className={cn('bg-muted h-2 w-full overflow-hidden rounded-full', className)}>
       <View
         className={cn('h-full rounded-full', toneClass[tone], barClassName)}
         style={{ width: `${pct}%` }}
       />
       {marker !== undefined ? (
         <View
-          className="absolute bottom-0 top-0 w-0.5 bg-foreground/60"
+          className="bg-foreground absolute bottom-0 top-0 w-0.5"
           style={{ left: `${Math.min(1, Math.max(0, marker)) * 100}%` }}
         />
       ) : null}

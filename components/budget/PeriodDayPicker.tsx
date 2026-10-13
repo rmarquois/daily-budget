@@ -19,22 +19,22 @@ export function PeriodDayPicker({ value, onChange }: PeriodDayPickerProps) {
 
   return (
     <View>
-      <View className="flex-row items-center justify-between rounded-xl border border-border p-2">
+      <View className="border-border flex-row items-center justify-between rounded-xl border p-2">
         <Pressable
           onPress={() => step(-1)}
           accessibilityLabel="Jour précédent"
-          className="h-12 w-12 items-center justify-center rounded-lg active:bg-accent"
+          className="active:bg-accent h-12 w-12 items-center justify-center rounded-lg"
         >
           <LucideIcon name="Minus" size={18} className="text-foreground" />
         </Pressable>
         <View className="items-center">
-          <Text className="text-xs text-muted-foreground">Mon mois commence le</Text>
-          <Text className="font-display text-3xl text-foreground">{value}</Text>
+          <Text className="text-muted-foreground text-xs">Mon mois commence le</Text>
+          <Text className="font-display text-foreground text-3xl">{value}</Text>
         </View>
         <Pressable
           onPress={() => step(1)}
           accessibilityLabel="Jour suivant"
-          className="h-12 w-12 items-center justify-center rounded-lg active:bg-accent"
+          className="active:bg-accent h-12 w-12 items-center justify-center rounded-lg"
         >
           <LucideIcon name="Plus" size={18} className="text-foreground" />
         </Pressable>
@@ -62,9 +62,9 @@ export function PeriodDayPicker({ value, onChange }: PeriodDayPickerProps) {
         ))}
       </View>
 
-      <View className="mt-4 flex-row items-start gap-2 rounded-lg bg-muted p-3">
-        <LucideIcon name="CalendarRange" size={16} className="mt-0.5 text-muted-foreground" />
-        <Text className="flex-1 text-xs leading-5 text-muted-foreground">
+      <View className="bg-muted mt-4 flex-row items-start gap-2 rounded-lg p-3">
+        <LucideIcon name="CalendarRange" size={16} className="text-muted-foreground mt-0.5" />
+        <Text className="text-muted-foreground flex-1 text-xs leading-5">
           Période actuelle : du {formatLongDay(period.start)} au {formatLongDay(period.end)} (
           {period.totalDays} jours).
           {value > 28 ? ' Les mois plus courts commencent le dernier jour du mois.' : ''}

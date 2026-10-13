@@ -25,7 +25,7 @@ function AlertDialogOverlayWeb({
   return (
     <AlertDialogPrimitive.Overlay
       className={cn(
-        'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-overlay/80 p-2',
+        'bg-overlay/80 absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center p-2',
         open ? 'web:animate-in web:fade-in-0' : 'web:animate-out web:fade-out-0',
         className
       )}
@@ -44,7 +44,7 @@ function AlertDialogOverlayNative({
   return (
     <AlertDialogPrimitive.Overlay
       className={cn(
-        'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-overlay/80 p-2',
+        'bg-overlay/80 absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center p-2',
         className
       )}
       {...props}
@@ -78,7 +78,7 @@ function AlertDialogContent({
       <AlertDialogOverlay>
         <AlertDialogPrimitive.Content
           className={cn(
-            'z-50 max-w-lg gap-4 rounded-lg border border-border bg-background p-6 shadow-lg shadow-foreground/10 web:duration-200',
+            'border-border bg-background web:duration-200 z-50 max-w-lg gap-4 rounded-lg border p-6 shadow-lg shadow-neutral-50',
             open
               ? 'web:animate-in web:fade-in-0 web:zoom-in-95'
               : 'web:animate-out web:fade-out-0 web:zoom-out-95',
@@ -126,7 +126,7 @@ function AlertDialogDescription({
 }) {
   return (
     <AlertDialogPrimitive.Description
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   )

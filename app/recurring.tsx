@@ -63,7 +63,7 @@ export default function RecurringScreen() {
   }
 
   return (
-    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
+    <SafeAreaView edges={['bottom']} className="bg-background flex-1">
       <Stack.Screen
         options={{
           title: existing
@@ -76,7 +76,7 @@ export default function RecurringScreen() {
               onPress={() => closeModal('/budget')}
               className="ml-2 h-10 justify-center px-2"
             >
-              <Text className="text-sm text-muted-foreground">Annuler</Text>
+              <Text className="text-muted-foreground text-sm">Annuler</Text>
             </Pressable>
           ),
         }}
@@ -105,7 +105,7 @@ export default function RecurringScreen() {
               autoFocus={!existing}
               tone={type === 'income' ? 'success' : 'default'}
             />
-            <Text className="mt-1 text-center text-xs text-muted-foreground">par période</Text>
+            <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
           </View>
 
           <FieldLabel>Nom</FieldLabel>
@@ -121,15 +121,15 @@ export default function RecurringScreen() {
               <Pressable
                 key={s}
                 onPress={() => setLabel(s)}
-                className="rounded-full bg-muted px-3 py-1.5 active:opacity-70"
+                className="bg-muted rounded-full px-3 py-1.5 active:opacity-70"
               >
-                <Text className="text-xs text-muted-foreground">{s}</Text>
+                <Text className="text-muted-foreground text-xs">{s}</Text>
               </Pressable>
             ))}
           </View>
         </ScrollView>
 
-        <View className="gap-2 border-t border-border px-5 pb-3 pt-3 web:mx-auto web:w-full web:max-w-xl">
+        <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
           <Button size="lg" onPress={save} disabled={!canSave}>
             <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
           </Button>

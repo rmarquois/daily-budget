@@ -20,8 +20,8 @@ export function TransactionRow({ transaction, onPress, isLast }: TransactionRowP
     <Pressable
       onPress={onPress}
       className={cn(
-        'flex-row items-center gap-3 px-4 py-3 active:bg-accent web:hover:bg-accent/60',
-        !isLast && 'border-b border-border'
+        'active:bg-accent web:hover:bg-accent/60 flex-row items-center gap-3 px-4 py-3',
+        !isLast && 'border-border border-b'
       )}
     >
       <View
@@ -37,10 +37,10 @@ export function TransactionRow({ transaction, onPress, isLast }: TransactionRowP
         />
       </View>
       <View className="flex-1">
-        <Text className="text-sm font-medium text-foreground" numberOfLines={1}>
+        <Text className="text-foreground text-sm font-medium" numberOfLines={1}>
           {transaction.label || category.label}
         </Text>
-        <Text className="text-xs text-muted-foreground">{category.label}</Text>
+        <Text className="text-muted-foreground text-xs">{category.label}</Text>
       </View>
       <Text
         className={cn(

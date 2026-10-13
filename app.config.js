@@ -23,7 +23,6 @@ module.exports = {
     'expo-video',
     'expo-web-browser',
   ],
-
   scheme: 'new-app',
   slug: 'new-app',
   splash: {
@@ -35,4 +34,4 @@ module.exports = {
   version: 'share',
   web: { bundler: 'metro', output: 'single', favicon: './assets/images/favicon.png' },
   platforms: ['ios', 'android', 'web'],
-};
+}

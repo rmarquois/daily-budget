@@ -28,27 +28,27 @@ export default function BudgetScreen() {
   const expenses = recurring.filter((r) => r.type === 'expense')
 
   return (
-    <SafeAreaView edges={['top']} className="flex-1 bg-background">
+    <SafeAreaView edges={['top']} className="bg-background flex-1">
       <ScrollView contentContainerClassName="pb-10" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow="Chaque période" title="Budget" right={<DemoBadge />} />
 
         <View className="px-5">
           <Card className="p-5">
-            <Text className="text-sm text-muted-foreground">Reste pour vivre par période</Text>
+            <Text className="text-muted-foreground text-sm">Reste pour vivre par période</Text>
             <Text
               className={cn(
-                'mt-1 font-display text-4xl tracking-tight',
+                'font-display mt-1 text-4xl tracking-tight',
                 budget < 0 ? 'text-destructive' : 'text-foreground'
               )}
             >
               {formatMoney(budget)}
             </Text>
-            <Text className="mt-1 text-xs text-muted-foreground">
+            <Text className="text-muted-foreground mt-1 text-xs">
               Soit environ {formatMoney(budget / period.totalDays)} par jour du{' '}
               {formatShortDay(period.start)} au {formatShortDay(period.end)}
             </Text>
 
-            <View className="mt-5 gap-2 border-t border-border pt-4">
+            <View className="border-border mt-5 gap-2 border-t pt-4">
               <Line label="Revenus" value={`+${formatMoney(income)}`} tone="success" />
               <Line label="Dépenses fixes" value={`−${formatMoney(expense)}`} />
             </View>
@@ -91,17 +91,17 @@ function Section({
         right={
           <Pressable
             onPress={add}
-            className="flex-row items-center gap-1 rounded-md px-2 py-1 active:bg-accent"
+            className="active:bg-accent flex-row items-center gap-1 rounded-md px-2 py-1"
           >
             <LucideIcon name="Plus" size={14} className="text-foreground" />
-            <Text className="text-xs font-medium text-foreground">Ajouter</Text>
+            <Text className="text-foreground text-xs font-medium">Ajouter</Text>
           </Pressable>
         }
       />
       <Card className="overflow-hidden">
         {items.length === 0 ? (
-          <Pressable onPress={add} className="px-4 py-5 active:bg-accent">
-            <Text className="text-sm text-muted-foreground">{empty}</Text>
+          <Pressable onPress={add} className="active:bg-accent px-4 py-5">
+            <Text className="text-muted-foreground text-sm">{empty}</Text>
           </Pressable>
         ) : (
           items.map((item, i) => (
@@ -121,7 +121,7 @@ function Section({
 function Line({ label, value, tone }: { label: string; value: string; tone?: 'success' }) {
   return (
     <View className="flex-row justify-between">
-      <Text className="text-sm text-muted-foreground">{label}</Text>
+      <Text className="text-muted-foreground text-sm">{label}</Text>
       <Text
         className={cn(
           'text-sm font-medium',

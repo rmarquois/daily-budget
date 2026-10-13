@@ -18,7 +18,7 @@ export function ThemeToggle() {
   return (
     <Pressable
       onPress={toggleColorScheme}
-      className="h-11 w-11 items-center justify-center active:opacity-70 web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2"
+      className="web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 h-11 w-11 items-center justify-center active:opacity-70"
     >
       {isDarkColorScheme ? (
         <LucideIcon name="MoonStar" className="text-foreground" size={23} strokeWidth={1.25} />

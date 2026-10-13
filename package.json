@@ -1,6 +1,8 @@
 {
-  "name": "new-app",
+  "name": "daily-budget",
+  "description": "A simple app that tells you how much you can spend today — and over the next 3 days.",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "expo-router/entry",
   "scripts": {
     "android": "expo run:android",
@@ -61,10 +63,11 @@
     "expo-video": "~57.0.5",
     "expo-web-browser": "~57.0.3",
     "lucide-react-native": "^0.562.0",
-    "nativewind": "~4.2.5",
+    "nativewind": "5.0.0-rc.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
+    "react-native-css": "3.1.0-rc.0",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-reanimated": "4.5.1",
     "react-native-safe-area-context": "~5.7.0",
@@ -73,13 +76,13 @@
     "react-native-web": "^0.21.0",
     "react-native-worklets": "0.10.1",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@eslint/compat": "^1.4.1",
     "@eslint/js": "^9",
+    "@tailwindcss/postcss": "4.1.12",
     "@types/react": "~19.2.10",
     "babel-preset-expo": "~57.0.0",
     "eslint": "^9",
@@ -88,24 +91,17 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^16.2.0",
-    "jiti": "^2.7.0",
+    "lightningcss": "1.30.1",
+    "postcss": "8.5.30",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "4.1.12",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.33.1"
   },
-  "expo": {
-    "doctor": {
-      "reactNativeDirectoryCheck": {
-        "exclude": [
-          "clsx",
-          "tailwindcss-animate"
-        ]
-      }
-    }
+  "resolutions": {
+    "lightningcss": "1.30.1"
   },
-  "private": true,
   "packageManager": "yarn@4.18.1",
   "lint-staged": {
     "*.{ts,tsx,mjs,js,jsx,css,yml,json,md}": [

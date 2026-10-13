@@ -43,14 +43,14 @@ export default function OnboardingScreen() {
 
   if (current === 'welcome') {
     return (
-      <SafeAreaView className="flex-1 bg-background">
-        <View className="flex-1 justify-between px-6 py-8 web:mx-auto web:w-full web:max-w-md">
+      <SafeAreaView className="bg-background flex-1">
+        <View className="web:mx-auto web:w-full web:max-w-md flex-1 justify-between px-6 py-8">
           <View className="flex-1 justify-center">
-            <View className="mb-8 h-14 w-14 items-center justify-center rounded-2xl bg-primary">
+            <View className="bg-primary mb-8 h-14 w-14 items-center justify-center rounded-2xl">
               <LucideIcon name="Wallet" size={26} className="text-primary-foreground" />
             </View>
-            <Text className="text-h1 tracking-tight text-foreground">Daily Budget</Text>
-            <Text className="mt-3 text-base leading-6 text-muted-foreground">
+            <Text className="text-h1 text-foreground tracking-tight">Daily Budget</Text>
+            <Text className="text-muted-foreground mt-3 text-base leading-6">
               Sachez chaque matin combien vous pouvez dépenser aujourd'hui — et les jours suivants.
             </Text>
 
@@ -89,16 +89,16 @@ export default function OnboardingScreen() {
   const items = store.recurring.filter((r) => r.type === current)
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="bg-background flex-1">
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <View className="flex-row items-center gap-3 px-5 pb-2 pt-3 web:mx-auto web:w-full web:max-w-md">
+        <View className="web:mx-auto web:w-full web:max-w-md flex-row items-center gap-3 px-5 pb-2 pt-3">
           <Pressable
             onPress={back}
             accessibilityLabel="Retour"
-            className="h-10 w-10 items-center justify-center rounded-md active:bg-accent"
+            className="active:bg-accent h-10 w-10 items-center justify-center rounded-md"
           >
             <LucideIcon name="ArrowLeft" size={20} className="text-foreground" />
           </Pressable>
@@ -182,8 +182,8 @@ export default function OnboardingScreen() {
                   <RecapLine label="Revenus" value={`+${formatMoney(income)}`} tone="success" />
                   <RecapLine label="Dépenses fixes" value={`−${formatMoney(expense)}`} />
                 </View>
-                <View className="mt-4 border-t border-border pt-4">
-                  <Text className="text-sm text-muted-foreground">Budget de la période</Text>
+                <View className="border-border mt-4 border-t pt-4">
+                  <Text className="text-muted-foreground text-sm">Budget de la période</Text>
                   <Text
                     className={cn(
                       'font-display text-4xl',
@@ -192,19 +192,19 @@ export default function OnboardingScreen() {
                   >
                     {formatMoney(budget)}
                   </Text>
-                  <Text className="mt-1 text-xs text-muted-foreground">
+                  <Text className="text-muted-foreground mt-1 text-xs">
                     ≈ {formatMoney(budget / period.totalDays)} par jour sur {period.totalDays} jours
                   </Text>
                 </View>
               </Card>
               {budget > 0 && firstPeriodBudget < budget ? (
-                <Text className="mt-4 text-xs leading-5 text-muted-foreground">
+                <Text className="text-muted-foreground mt-4 text-xs leading-5">
                   Comme la période en cours a déjà commencé, votre premier budget est calculé au
                   prorata : {formatMoney(firstPeriodBudget)} jusqu'au {formatLongDay(period.end)}.
                 </Text>
               ) : null}
               {budget <= 0 ? (
-                <Text className="mt-4 text-sm text-destructive">
+                <Text className="text-destructive mt-4 text-sm">
                   Vos dépenses fixes dépassent vos revenus. Vous pourrez ajuster tout cela dans
                   l'onglet Budget.
                 </Text>
@@ -213,7 +213,7 @@ export default function OnboardingScreen() {
           ) : null}
         </ScrollView>
 
-        <View className="px-6 pb-4 pt-2 web:mx-auto web:w-full web:max-w-md">
+        <View className="web:mx-auto web:w-full web:max-w-md px-6 pb-4 pt-2">
           {current === 'recap' ? (
             <Button size="lg" onPress={finish}>
               <Text>C'est parti</Text>
@@ -236,8 +236,8 @@ export default function OnboardingScreen() {
 function StepTitle({ title, text }: { title: string; text: string }) {
   return (
     <View className="mb-6">
-      <Text className="text-h2 tracking-tight text-foreground">{title}</Text>
-      <Text className="mt-2 text-sm leading-5 text-muted-foreground">{text}</Text>
+      <Text className="text-h2 text-foreground tracking-tight">{title}</Text>
+      <Text className="text-muted-foreground mt-2 text-sm leading-5">{text}</Text>
     </View>
   )
 }
@@ -253,12 +253,12 @@ function Feature({
 }) {
   return (
     <View className="flex-row items-center gap-4">
-      <View className="h-10 w-10 items-center justify-center rounded-lg border border-border">
+      <View className="border-border h-10 w-10 items-center justify-center rounded-lg border">
         <LucideIcon name={icon} size={18} className="text-foreground" />
       </View>
       <View className="flex-1">
-        <Text className="text-sm font-semibold text-foreground">{title}</Text>
-        <Text className="text-sm text-muted-foreground">{text}</Text>
+        <Text className="text-foreground text-sm font-semibold">{title}</Text>
+        <Text className="text-muted-foreground text-sm">{text}</Text>
       </View>
     </View>
   )
@@ -267,7 +267,7 @@ function Feature({
 function RecapLine({ label, value, tone }: { label: string; value: string; tone?: 'success' }) {
   return (
     <View className="flex-row justify-between">
-      <Text className="text-sm text-muted-foreground">{label}</Text>
+      <Text className="text-muted-foreground text-sm">{label}</Text>
       <Text
         className={cn(
           'text-sm font-medium',

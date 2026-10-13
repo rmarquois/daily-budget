@@ -24,16 +24,16 @@ export default function TodayScreen() {
   const noBudget = summary.budget <= 0 && summary.income === 0
 
   return (
-    <SafeAreaView edges={['top']} className="flex-1 bg-background">
+    <SafeAreaView edges={['top']} className="bg-background flex-1">
       <ScrollView contentContainerClassName="pb-28" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow={formatLongDay(today)} title="Aujourd'hui" right={<DemoBadge />} />
 
         <View className="px-5">
           {noBudget ? (
             <Pressable onPress={() => router.push('/budget')}>
-              <Card className="mb-4 flex-row items-center gap-3 border-warning/40 bg-warning/10 p-4">
+              <Card className="border-warning/40 bg-warning/10 mb-4 flex-row items-center gap-3 p-4">
                 <LucideIcon name="TriangleAlert" size={18} className="text-warning" />
-                <Text className="flex-1 text-sm text-foreground">
+                <Text className="text-foreground flex-1 text-sm">
                   Ajoutez vos revenus récurrents pour calculer votre budget quotidien.
                 </Text>
                 <LucideIcon name="ChevronRight" size={18} className="text-muted-foreground" />
@@ -42,13 +42,13 @@ export default function TodayScreen() {
           ) : null}
 
           {/* Hero: what's left to spend today */}
-          <View className="rounded-2xl bg-primary p-6">
-            <Text className="text-sm font-medium text-primary-foreground/70">
+          <View className="bg-primary rounded-2xl p-6">
+            <Text className="text-primary-foreground text-sm font-medium">
               {overspent ? 'Dépassement du jour' : 'Vous pouvez encore dépenser'}
             </Text>
             <Text
               className={cn(
-                'mt-1 font-display text-5xl tracking-tight',
+                'font-display mt-1 text-5xl tracking-tight',
                 overspent ? 'text-destructive' : 'text-primary-foreground'
               )}
               adjustsFontSizeToFit
@@ -59,19 +59,19 @@ export default function TodayScreen() {
             <ProgressBar
               value={allowance > 0 ? spent / allowance : spent > 0 ? 1 : 0}
               tone={overspent ? 'destructive' : 'default'}
-              className="mt-5 bg-primary-foreground/15"
+              className="bg-muted-foreground mt-5"
               barClassName={overspent ? undefined : 'bg-primary-foreground'}
             />
             <View className="mt-3 flex-row justify-between">
-              <Text className="text-xs text-primary-foreground/70">
+              <Text className="text-primary-foreground text-xs">
                 {formatMoney(Math.max(0, spent))} dépensés
               </Text>
-              <Text className="text-xs text-primary-foreground/70">
+              <Text className="text-primary-foreground text-xs">
                 Budget du jour : {formatMoney(allowance)}
               </Text>
             </View>
             {overspent ? (
-              <Text className="mt-3 text-xs leading-5 text-primary-foreground/80">
+              <Text className="text-primary-foreground mt-3 text-xs leading-5">
                 Pas de panique : ce dépassement sera réparti sur les{' '}
                 {Math.max(1, todayBudget.daysLeft - 1)} jours restants de la période.
               </Text>
@@ -89,7 +89,7 @@ export default function TodayScreen() {
               />
             ))}
           </View>
-          <Text className="mt-2 px-1 text-xs text-muted-foreground">
+          <Text className="text-muted-foreground mt-2 px-1 text-xs">
             Montant disponible chaque jour si vous ne dépensez plus rien aujourd'hui.
           </Text>
 
@@ -98,7 +98,7 @@ export default function TodayScreen() {
             title="Dépenses du jour"
             right={
               todayTransactions.length > 0 ? (
-                <Text className="text-xs text-muted-foreground">
+                <Text className="text-muted-foreground text-xs">
                   {todayTransactions.length}{' '}
                   {todayTransactions.length > 1 ? 'opérations' : 'opération'}
                 </Text>
@@ -109,15 +109,15 @@ export default function TodayScreen() {
             {todayTransactions.length === 0 ? (
               <Pressable
                 onPress={() => router.push('/transaction')}
-                className="items-center px-6 py-8 active:bg-accent"
+                className="active:bg-accent items-center px-6 py-8"
               >
-                <View className="mb-3 h-11 w-11 items-center justify-center rounded-full bg-muted">
+                <View className="bg-muted mb-3 h-11 w-11 items-center justify-center rounded-full">
                   <LucideIcon name="Receipt" size={20} className="text-muted-foreground" />
                 </View>
-                <Text className="text-sm font-medium text-foreground">
+                <Text className="text-foreground text-sm font-medium">
                   Rien de noté aujourd'hui
                 </Text>
-                <Text className="mt-1 text-center text-xs text-muted-foreground">
+                <Text className="text-muted-foreground mt-1 text-center text-xs">
                   Touchez ici ou le bouton + pour ajouter une dépense.
                 </Text>
               </Pressable>
@@ -139,11 +139,11 @@ export default function TodayScreen() {
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center gap-2">
                 <LucideIcon name="CalendarRange" size={16} className="text-muted-foreground" />
-                <Text className="text-sm text-muted-foreground">
+                <Text className="text-muted-foreground text-sm">
                   {formatShortDay(summary.period.start)} → {formatShortDay(summary.period.end)}
                 </Text>
               </View>
-              <Text className="text-xs font-medium text-muted-foreground">
+              <Text className="text-muted-foreground text-xs font-medium">
                 Jour {summary.daysElapsed}/{summary.period.totalDays}
               </Text>
             </View>
@@ -157,7 +157,7 @@ export default function TodayScreen() {
               >
                 {formatMoney(summary.remaining)}
               </Text>
-              <Text className="text-sm text-muted-foreground">
+              <Text className="text-muted-foreground text-sm">
                 restants sur {formatMoneyRounded(summary.budget)}
               </Text>
             </View>
@@ -176,14 +176,14 @@ export default function TodayScreen() {
                     : 'success'
               }
             />
-            <Text className="mt-2 text-xs text-muted-foreground">
+            <Text className="text-muted-foreground mt-2 text-xs">
               Le trait indique où vous devriez en être aujourd'hui.
               {summary.prorated
                 ? ' Première période : le budget est calculé à partir du jour où vous avez commencé.'
                 : ''}
             </Text>
 
-            <View className="mt-5 flex-row border-t border-border pt-4">
+            <View className="border-border mt-5 flex-row border-t pt-4">
               <Stat label="Dépensé" value={formatMoney(summary.spent)} />
               <Stat label="Jours restants" value={String(todayBudget.daysLeft)} />
               <Stat
@@ -198,10 +198,10 @@ export default function TodayScreen() {
       <Pressable
         onPress={() => router.push('/transaction')}
         accessibilityLabel="Ajouter une dépense"
-        className="absolute bottom-6 right-5 h-14 flex-row items-center gap-2 rounded-full bg-primary px-5 shadow-lg shadow-foreground/20 active:opacity-90"
+        className="bg-primary absolute bottom-6 right-5 h-14 flex-row items-center gap-2 rounded-full px-5 shadow-lg active:opacity-90"
       >
         <LucideIcon name="Plus" size={20} className="text-primary-foreground" />
-        <Text className="text-sm font-semibold text-primary-foreground">Dépense</Text>
+        <Text className="text-primary-foreground text-sm font-semibold">Dépense</Text>
       </Pressable>
     </SafeAreaView>
   )
@@ -212,11 +212,11 @@ function UpcomingCard({ day, label }: { day: DayBudget; label: string }) {
   const negative = day.available < 0
   return (
     <Card className="flex-1 p-3.5">
-      <Text className="text-xs font-medium text-muted-foreground">{label}</Text>
-      <Text className="text-[11px] text-muted-foreground/70">{formatShortDay(day.day)}</Text>
+      <Text className="text-muted-foreground text-xs font-medium">{label}</Text>
+      <Text className="text-muted-foreground text-[11px]">{formatShortDay(day.day)}</Text>
       <Text
         className={cn(
-          'mt-2 font-display text-lg tracking-tight',
+          'font-display mt-2 text-lg tracking-tight',
           negative ? 'text-destructive' : 'text-foreground'
         )}
         adjustsFontSizeToFit
@@ -225,11 +225,11 @@ function UpcomingCard({ day, label }: { day: DayBudget; label: string }) {
         {formatMoneyRounded(day.available)}
       </Text>
       {newPeriod ? (
-        <Text className="mt-1 text-[10px] font-medium uppercase tracking-wide text-success">
+        <Text className="text-success mt-1 text-[10px] font-medium uppercase tracking-wide">
           Nouvelle période
         </Text>
       ) : day.spent !== 0 ? (
-        <Text className="mt-1 text-[10px] text-muted-foreground">
+        <Text className="text-muted-foreground mt-1 text-[10px]">
           {formatMoneyRounded(day.spent)} prévus
         </Text>
       ) : null}
@@ -240,8 +240,8 @@ function UpcomingCard({ day, label }: { day: DayBudget; label: string }) {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <View className="flex-1">
-      <Text className="text-[11px] text-muted-foreground">{label}</Text>
-      <Text className="mt-0.5 text-sm font-semibold text-foreground">{value}</Text>
+      <Text className="text-muted-foreground text-[11px]">{label}</Text>
+      <Text className="text-foreground mt-0.5 text-sm font-semibold">{value}</Text>
     </View>
   )
 }

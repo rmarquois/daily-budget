@@ -66,13 +66,13 @@ export default function TransactionScreen() {
   const title = existing ? 'Modifier' : type === 'expense' ? 'Nouvelle dépense' : 'Nouvelle rentrée'
 
   return (
-    <SafeAreaView edges={['bottom']} className="flex-1 bg-background">
+    <SafeAreaView edges={['bottom']} className="bg-background flex-1">
       <Stack.Screen
         options={{
           title,
           headerLeft: () => (
             <Pressable onPress={() => closeModal()} className="ml-2 h-10 justify-center px-2">
-              <Text className="text-sm text-muted-foreground">Annuler</Text>
+              <Text className="text-muted-foreground text-sm">Annuler</Text>
             </Pressable>
           ),
         }}
@@ -136,7 +136,7 @@ export default function TransactionScreen() {
                     <Text
                       className={cn(
                         'text-sm',
-                        active ? 'font-medium text-primary-foreground' : 'text-foreground'
+                        active ? 'text-primary-foreground font-medium' : 'text-foreground'
                       )}
                     >
                       {c.label}
@@ -149,20 +149,20 @@ export default function TransactionScreen() {
 
           <View className="mt-6">
             <FieldLabel>Date</FieldLabel>
-            <View className="h-12 flex-row items-center rounded-md border border-input">
+            <View className="border-input h-12 flex-row items-center rounded-md border">
               <Pressable
                 onPress={() => setDate((d) => addDays(d, -1))}
                 accessibilityLabel="Jour précédent"
-                className="h-full w-12 items-center justify-center active:bg-accent"
+                className="active:bg-accent h-full w-12 items-center justify-center"
               >
                 <LucideIcon name="ChevronLeft" size={18} className="text-foreground" />
               </Pressable>
               <Pressable onPress={() => setDate(today)} className="flex-1 items-center">
-                <Text className="text-sm font-medium text-foreground">
+                <Text className="text-foreground text-sm font-medium">
                   {formatRelativeDay(date, today)}
                 </Text>
                 {date !== today ? (
-                  <Text className="text-[11px] text-muted-foreground">
+                  <Text className="text-muted-foreground text-[11px]">
                     Toucher pour revenir à aujourd'hui
                   </Text>
                 ) : null}
@@ -170,20 +170,20 @@ export default function TransactionScreen() {
               <Pressable
                 onPress={() => setDate((d) => addDays(d, 1))}
                 accessibilityLabel="Jour suivant"
-                className="h-full w-12 items-center justify-center active:bg-accent"
+                className="active:bg-accent h-full w-12 items-center justify-center"
               >
                 <LucideIcon name="ChevronRight" size={18} className="text-foreground" />
               </Pressable>
             </View>
             {date > today ? (
-              <Text className="mt-2 text-xs text-muted-foreground">
+              <Text className="text-muted-foreground mt-2 text-xs">
                 Dépense prévue : elle sera déduite de ce jour-là.
               </Text>
             ) : null}
           </View>
         </ScrollView>
 
-        <View className="gap-2 border-t border-border px-5 pb-3 pt-3 web:mx-auto web:w-full web:max-w-xl">
+        <View className="border-border web:mx-auto web:w-full web:max-w-xl gap-2 border-t px-5 pb-3 pt-3">
           <Button size="lg" onPress={save} disabled={!parsed}>
             <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
           </Button>

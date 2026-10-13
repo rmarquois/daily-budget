@@ -35,15 +35,14 @@ export function AmountInput({
         autoFocus={autoFocus}
         style={inputStyle}
         className={cn(
-          'text-center font-display tracking-tight placeholder:text-muted-foreground/50 web:outline-none',
+          'font-display placeholder:text-muted-foreground web:outline-none text-center tracking-tight',
           size === 'lg' ? 'text-6xl' : 'text-4xl',
           color
         )}
-        placeholderClassName="text-muted-foreground"
       />
       <Text
         className={cn(
-          'ml-1 font-semibold text-muted-foreground',
+          'text-muted-foreground ml-1 font-semibold',
           size === 'lg' ? 'text-3xl' : 'text-2xl'
         )}
       >

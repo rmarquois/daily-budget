@@ -34,7 +34,7 @@ function TableBody({
 }) {
   return (
     <TablePrimitive.Body
-      className={cn('flex-1 border-border [&_tr:last-child]:border-0', className)}
+      className={cn('border-border flex-1 [&_tr:last-child]:border-0', className)}
       {...props}
     />
   )
@@ -63,7 +63,7 @@ function TableRow({
   return (
     <TablePrimitive.Row
       className={cn(
-        'flex-row border-b border-border web:transition-colors web:hover:bg-muted/50 web:data-[state=selected]:bg-muted',
+        'border-border web:transition-colors web:hover:bg-muted/50 web:data-[state=selected]:bg-muted flex-row border-b',
         className
       )}
       {...props}
@@ -81,7 +81,7 @@ function TableHead({
     <TextClassContext.Provider value="native:text-lg text-body web:group-hover:underline">
       <TablePrimitive.Head
         className={cn(
-          'text-body h-12 justify-center px-4 text-left [&:has([role=checkbox])]:pr-0',
+          'text-body h-12 justify-center px-4 text-left has-[[role=checkbox]]:pr-0',
           className
         )}
         {...props}
@@ -98,7 +98,7 @@ function TableCell({
 }) {
   return (
     <TablePrimitive.Cell
-      className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
+      className={cn('p-4 align-middle has-[[role=checkbox]]:pr-0', className)}
       {...props}
     />
   )

@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { useTheme } from '@/theming/ThemeProvider'
 
 const alertVariants = cva(
-  'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-foreground/10',
+  'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-neutral-50',
   {
     variants: {
       variant: {
@@ -85,7 +85,7 @@ function Alert({
 function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) {
   return (
     <Text
-      className={cn('text-body mb-1 pl-7 leading-none tracking-tight text-foreground', className)}
+      className={cn('text-body text-foreground mb-1 pl-7 leading-none tracking-tight', className)}
       {...props}
     />
   )
@@ -93,7 +93,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) 
 
 function AlertDescription({ className, ...props }: React.ComponentProps<typeof Text>) {
   return (
-    <Text className={cn('pl-7 text-sm leading-relaxed text-foreground', className)} {...props} />
+    <Text className={cn('text-foreground pl-7 text-sm leading-relaxed', className)} {...props} />
   )
 }
 

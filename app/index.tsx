@@ -9,7 +9,7 @@ export default function Index() {
 
   if (!hydrated) {
     return (
-      <View className="flex-1 items-center justify-center bg-background">
+      <View className="bg-background flex-1 items-center justify-center">
         <ActivityIndicator />
       </View>
     )

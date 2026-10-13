@@ -1,6 +1,6 @@
 import type { LucideProps } from 'lucide-react-native'
 import * as icons from 'lucide-react-native/icons'
-import { cssInterop } from 'nativewind'
+import { styled } from 'nativewind'
 import React from 'react'
 import { memo, useMemo } from 'react'
 
@@ -12,10 +12,10 @@ const Icon: React.FC<IconProps> = memo(({ name, className, ...rest }) => {
     const Icon = icons[name] ?? icons.Image
     Icon.displayName = name
 
-    return cssInterop(Icon, {
+    return styled(Icon, {
       className: {
         target: 'style',
-        nativeStyleToProp: {
+        nativeStyleMapping: {
           color: true,
           opacity: true,
           width: true,

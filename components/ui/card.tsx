@@ -10,15 +10,7 @@ function Card({
 }: ViewProps & {
   ref?: React.RefObject<View>
 }) {
-  return (
-    <View
-      className={cn(
-        'rounded-lg border border-border bg-card shadow-sm shadow-foreground/10',
-        className
-      )}
-      {...props}
-    />
-  )
+  return <View className={cn('border-border bg-card rounded-lg border', className)} {...props} />
 }
 
 function CardHeader({
@@ -40,7 +32,7 @@ function CardTitle({
     <Text
       role="heading"
       aria-level={3}
-      className={cn('text-h3 leading-none tracking-tight text-card-foreground', className)}
+      className={cn('text-h3 text-card-foreground leading-none tracking-tight', className)}
       {...props}
     />
   )
@@ -52,7 +44,7 @@ function CardDescription({
 }: TextProps & {
   ref?: React.RefObject<Text>
 }) {
-  return <Text className={cn('text-sm text-muted-foreground', className)} {...props} />
+  return <Text className={cn('text-muted-foreground text-sm', className)} {...props} />
 }
 
 function CardContent({

@@ -68,7 +68,7 @@ function Button({ ref, className, variant, size, ...props }: ButtonProps) {
     >
       <Pressable
         className={cn(
-          props.disabled && 'opacity-50 web:pointer-events-none',
+          props.disabled && 'web:pointer-events-none opacity-50',
           buttonVariants({ variant, size, className })
         )}
         ref={ref}

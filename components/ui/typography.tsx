@@ -16,7 +16,7 @@ function H1({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="1"
       className={cn(
-        'text-h1 tracking-tight text-foreground web:select-text web:scroll-m-20 lg:text-5xl',
+        'text-h1 text-foreground web:select-text web:scroll-m-20 tracking-tight lg:text-5xl',
         className
       )}
       {...props}
@@ -31,7 +31,7 @@ function H2({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="2"
       className={cn(
-        'text-h2 tracking-tight text-foreground first:mt-0 web:select-text web:scroll-m-20',
+        'text-h2 text-foreground web:select-text web:scroll-m-20 tracking-tight first:mt-0',
         className
       )}
       {...props}
@@ -46,7 +46,7 @@ function H3({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="3"
       className={cn(
-        'text-h3 tracking-tight text-foreground web:select-text web:scroll-m-20',
+        'text-h3 text-foreground web:select-text web:scroll-m-20 tracking-tight',
         className
       )}
       {...props}
@@ -61,7 +61,7 @@ function H4({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="4"
       className={cn(
-        'text-h4 tracking-tight text-foreground web:select-text web:scroll-m-20',
+        'text-h4 text-foreground web:select-text web:scroll-m-20 tracking-tight',
         className
       )}
       {...props}
@@ -82,7 +82,7 @@ function BlockQuote({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       role={Platform.OS === 'web' ? 'blockquote' : undefined}
       className={cn(
-        'native:mt-4 native:pl-3 text-body mt-6 border-l-2 border-border pl-6 italic text-foreground web:select-text',
+        'native:mt-4 native:pl-3 text-body border-border text-foreground web:select-text mt-6 border-l-2 pl-6 italic',
         className
       )}
       {...props}
@@ -96,7 +96,7 @@ function Code({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       role={Platform.OS === 'web' ? 'code' : undefined}
       className={cn(
-        'text-caption relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] text-foreground web:select-text',
+        'text-caption bg-muted text-foreground web:select-text relative rounded-md px-[0.3rem] py-[0.2rem]',
         className
       )}
       {...props}
@@ -125,7 +125,7 @@ function Small({ className, asChild = false, ...props }: TypographyProps) {
   const Component = asChild ? Slot : RNText
   return (
     <Component
-      className={cn('text-caption leading-none text-foreground web:select-text', className)}
+      className={cn('text-caption text-foreground web:select-text leading-none', className)}
       {...props}
     />
   )

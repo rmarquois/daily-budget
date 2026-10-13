@@ -1,6 +1,5 @@
-import { vars } from 'nativewind'
+import { VariableContextProvider } from 'nativewind'
 import { ReactNode, createContext, useState, useMemo, useContext, useCallback } from 'react'
-import { View } from 'react-native'
 
 import { Theme } from './Theme'
 import lightTheme from './themes/light'
@@ -89,12 +88,9 @@ export const ThemeProvider = ({
 
   return (
     <ThemeContext.Provider value={themeContextValue}>
-      <View
-        className="h-full w-full"
-        style={vars({ ...strippedHslColors, ...flattenedTypographyVariables })}
-      >
+      <VariableContextProvider value={{ ...strippedHslColors, ...flattenedTypographyVariables }}>
         {children}
-      </View>
+      </VariableContextProvider>
     </ThemeContext.Provider>
   )
 }
