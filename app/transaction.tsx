@@ -69,11 +69,6 @@ export default function TransactionScreen() {
       <Stack.Screen
         options={{
           title,
-          headerLeft: () => (
-            <Pressable onPress={() => closeModal()} className="ml-2 h-10 justify-center px-2">
-              <Text className="text-muted-foreground text-sm">Annuler</Text>
-            </Pressable>
-          ),
         }}
       />
       <KeyboardAvoidingView

@@ -70,14 +70,6 @@ export default function RecurringScreen() {
             : type === 'income'
               ? 'Revenu récurrent'
               : 'Dépense récurrente',
-          headerLeft: () => (
-            <Pressable
-              onPress={() => closeModal('/budget')}
-              className="ml-2 h-10 justify-center px-2"
-            >
-              <Text className="text-muted-foreground text-sm">Annuler</Text>
-            </Pressable>
-          ),
         }}
       />
       <KeyboardAvoidingView
