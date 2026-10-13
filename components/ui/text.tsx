@@ -1,4 +1,4 @@
-import * as Slot from '@rn-primitives/slot'
+import { Slot } from '@rn-primitives/slot'
 import * as React from 'react'
 import { Text as RNText } from 'react-native'
 
@@ -15,7 +15,7 @@ function Text({
   asChild?: boolean
 }) {
   const textClass = React.useContext(TextClassContext)
-  const Component = asChild ? Slot.Text : RNText
+  const Component = asChild ? Slot : RNText
   return <Component className={cn('web:select-text', textClass, className)} {...props} />
 }
 
