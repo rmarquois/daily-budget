@@ -23,19 +23,22 @@ export function AmountInput({
   const color = tone === 'success' ? 'text-success' : 'text-foreground'
   return (
     <View className="flex-row items-center justify-center">
-      <TextInput
-        value={value}
-        onChangeText={(t) => onChangeText(t.replace(/[^0-9.,]/g, ''))}
-        placeholder="0"
-        keyboardType="decimal-pad"
-        inputMode="decimal"
-        autoFocus={autoFocus}
-        className={cn(
-          'font-display placeholder:text-muted-foreground web:outline-none text-center tracking-tight',
-          size === 'lg' ? 'text-6xl leading-[72px]' : 'text-4xl leading-[48px]',
-          color
-        )}
-      />
+      <View className="w-40">
+        <TextInput
+          value={value}
+          onChangeText={(t) => onChangeText(t.replace(/[^0-9.,]/g, ''))}
+          placeholder="0"
+          keyboardType="decimal-pad"
+          inputMode="decimal"
+          autoFocus={autoFocus}
+          maxLength={4}
+          className={cn(
+            'font-display placeholder:text-muted-foreground web:outline-none w-full text-center tracking-tight',
+            size === 'lg' ? 'text-6xl leading-[72px]' : 'text-4xl leading-[48px]',
+            color
+          )}
+        />
+      </View>
       <Text
         className={cn(
           'text-muted-foreground ml-1 font-semibold',
