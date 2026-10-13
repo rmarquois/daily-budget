@@ -82,7 +82,6 @@ export default function HistoryScreen() {
         sections={sections}
         keyExtractor={(t) => t.id}
         stickySectionHeadersEnabled={false}
-        contentContainerStyle={styles.content}
         renderSectionHeader={({ section }) => (
           <View className="mb-2 mt-5 flex-row items-center justify-between px-1">
             <Text className="text-foreground text-sm font-semibold">
@@ -110,7 +109,7 @@ export default function HistoryScreen() {
           </View>
         )}
         ListEmptyComponent={
-          <View className="items-center px-8 py-16">
+          <View className="flex-1 items-center justify-center">
             <View className="bg-muted mb-3 h-12 w-12 items-center justify-center rounded-full">
               <LucideIcon name="Inbox" size={22} className="text-muted-foreground" />
             </View>
@@ -120,11 +119,9 @@ export default function HistoryScreen() {
             </Text>
           </View>
         }
+        className="flex-1"
+        contentContainerClassName="p-4 grow"
       />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  content: { paddingHorizontal: 20, paddingBottom: 40 },
-})
