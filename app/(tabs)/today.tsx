@@ -1,6 +1,5 @@
 import { router } from 'expo-router'
 import { Pressable, ScrollView, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { DemoBadge } from '@/components/budget/DemoBadge'
 import { ProgressBar } from '@/components/budget/ProgressBar'
@@ -24,8 +23,8 @@ export default function TodayScreen() {
   const noBudget = summary.budget <= 0 && summary.income === 0
 
   return (
-    <SafeAreaView edges={['top']} className="bg-background flex-1">
-      <ScrollView contentContainerClassName="pb-28" showsVerticalScrollIndicator={false}>
+    <View className="bg-background pt-safe flex-1">
+      <ScrollView contentContainerClassName="pb-26" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow={formatLongDay(today)} title="Aujourd'hui" right={<DemoBadge />} />
 
         <View className="px-5">
@@ -203,7 +202,7 @@ export default function TodayScreen() {
         <LucideIcon name="Plus" size={20} className="text-primary-foreground" />
         <Text className="text-primary-foreground text-sm font-semibold">Dépense</Text>
       </Pressable>
-    </SafeAreaView>
+    </View>
   )
 }
 

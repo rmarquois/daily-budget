@@ -1,7 +1,6 @@
 import { router } from 'expo-router'
 import * as React from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { PeriodDayPicker } from '@/components/budget/PeriodDayPicker'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
@@ -32,8 +31,8 @@ export default function SettingsScreen() {
   }
 
   return (
-    <SafeAreaView edges={['top']} className="bg-background flex-1">
-      <ScrollView contentContainerClassName="pb-10" showsVerticalScrollIndicator={false}>
+    <View className="bg-background pt-safe flex-1">
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow="Préférences" title="Réglages" />
 
         <View className="px-5">
@@ -88,7 +87,7 @@ export default function SettingsScreen() {
           </Text>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 

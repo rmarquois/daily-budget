@@ -1,7 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
@@ -66,7 +65,7 @@ export default function TransactionScreen() {
   const title = existing ? 'Modifier' : type === 'expense' ? 'Nouvelle dépense' : 'Nouvelle rentrée'
 
   return (
-    <SafeAreaView edges={['bottom']} className="bg-background flex-1">
+    <View className="bg-background h-vh-safe">
       <Stack.Screen
         options={{
           title,
@@ -82,6 +81,7 @@ export default function TransactionScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView
+          className="flex-1"
           contentContainerClassName="px-5 pb-6 pt-4 web:mx-auto web:w-full web:max-w-xl"
           keyboardShouldPersistTaps="handled"
         >
@@ -196,6 +196,6 @@ export default function TransactionScreen() {
           ) : null}
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   )
 }

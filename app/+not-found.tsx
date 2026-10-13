@@ -1,6 +1,5 @@
 import { router } from 'expo-router'
 import { View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -15,7 +14,7 @@ import { Text } from '@/components/ui/text'
 
 export default function NotFoundScreen() {
   return (
-    <SafeAreaView className="bg-background flex-1">
+    <View className="bg-background h-vh-safe">
       <View className="flex-1 items-center justify-center px-6">
         <Card className="w-full max-w-sm">
           <CardHeader className="items-center">
@@ -39,6 +38,6 @@ export default function NotFoundScreen() {
           </CardFooter>
         </Card>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }

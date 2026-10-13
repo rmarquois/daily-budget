@@ -1,7 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
@@ -63,7 +62,7 @@ export default function RecurringScreen() {
   }
 
   return (
-    <SafeAreaView edges={['bottom']} className="bg-background flex-1">
+    <View className="bg-background h-vh-safe">
       <Stack.Screen
         options={{
           title: existing
@@ -142,6 +141,6 @@ export default function RecurringScreen() {
           ) : null}
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   )
 }

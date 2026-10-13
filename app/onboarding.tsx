@@ -1,7 +1,6 @@
 import { router } from 'expo-router'
 import * as React from 'react'
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { PeriodDayPicker } from '@/components/budget/PeriodDayPicker'
 import { RecurringQuickAdd } from '@/components/budget/RecurringQuickAdd'
@@ -43,7 +42,7 @@ export default function OnboardingScreen() {
 
   if (current === 'welcome') {
     return (
-      <SafeAreaView className="bg-background flex-1">
+      <View className="bg-background h-vh-safe">
         <View className="web:mx-auto web:w-full web:max-w-md flex-1 justify-between px-6 py-8">
           <View className="flex-1 justify-center">
             <View className="bg-primary mb-8 h-14 w-14 items-center justify-center rounded-2xl">
@@ -82,14 +81,14 @@ export default function OnboardingScreen() {
             </Button>
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     )
   }
 
   const items = store.recurring.filter((r) => r.type === current)
 
   return (
-    <SafeAreaView className="bg-background flex-1">
+    <View className="bg-background h-vh-safe">
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -229,7 +228,7 @@ export default function OnboardingScreen() {
           )}
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   )
 }
 

@@ -1,6 +1,5 @@
 import { router } from 'expo-router'
 import { Pressable, ScrollView, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { DemoBadge } from '@/components/budget/DemoBadge'
 import { RecurringRow } from '@/components/budget/RecurringRow'
@@ -28,8 +27,8 @@ export default function BudgetScreen() {
   const expenses = recurring.filter((r) => r.type === 'expense')
 
   return (
-    <SafeAreaView edges={['top']} className="bg-background flex-1">
-      <ScrollView contentContainerClassName="pb-10" showsVerticalScrollIndicator={false}>
+    <View className="bg-background pt-safe flex-1">
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow="Chaque période" title="Budget" right={<DemoBadge />} />
 
         <View className="px-5">
@@ -68,7 +67,7 @@ export default function BudgetScreen() {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 
