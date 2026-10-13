@@ -45,18 +45,6 @@ export default function SettingsScreen() {
             <PeriodDayPicker value={periodStartDay} onChange={setPeriodStartDay} />
           </Card>
 
-          <SectionTitle title="Apparence" />
-          <Card className="overflow-hidden">
-            <Row icon={isDarkColorScheme ? 'MoonStar' : 'Sun'} label="Thème">
-              <Text className="text-muted-foreground text-sm">
-                Automatique · {isDarkColorScheme ? 'Sombre' : 'Clair'}
-              </Text>
-            </Row>
-          </Card>
-          <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
-            L’app passe en clair ou en sombre selon le réglage de votre appareil.
-          </Text>
-
           <SectionTitle title="Données" />
           <Card className="overflow-hidden">
             <Row icon="Smartphone" label="Stockées sur cet appareil" isLast={false}>
@@ -82,7 +70,7 @@ export default function SettingsScreen() {
             synchronisées entre appareils.
           </Text>
 
-          <Text className="text-muted-foreground mt-10 text-center text-xs">
+          <Text className="text-muted-foreground my-10 text-center text-xs">
             Daily Budget · v1.0
           </Text>
         </View>
