@@ -16,6 +16,7 @@ interface TransactionRowProps {
 export function TransactionRow({ transaction, onPress, isLast }: TransactionRowProps) {
   const category = getCategory(transaction.categoryId)
   const isIncome = transaction.type === 'income'
+
   return (
     <Pressable
       onPress={onPress}
@@ -27,7 +28,7 @@ export function TransactionRow({ transaction, onPress, isLast }: TransactionRowP
       <View
         className={cn(
           'h-9 w-9 items-center justify-center rounded-full',
-          isIncome ? 'bg-success/15' : 'bg-muted'
+          isIncome ? 'bg-green-50' : 'bg-muted'
         )}
       >
         <LucideIcon

@@ -15,6 +15,7 @@ interface RecurringRowProps {
 
 export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowProps) {
   const isIncome = item.type === 'income'
+
   return (
     <Pressable
       onPress={onPress}
@@ -27,13 +28,13 @@ export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowPr
       <View
         className={cn(
           'h-8 w-8 items-center justify-center rounded-full',
-          isIncome ? 'bg-success/15' : 'bg-muted'
+          isIncome ? 'bg-green-50' : 'bg-red-50'
         )}
       >
         <LucideIcon
           name={isIncome ? 'ArrowDownLeft' : 'ArrowUpRight'}
           size={16}
-          className={isIncome ? 'text-success' : 'text-muted-foreground'}
+          className={isIncome ? 'text-success' : 'text-destructive'}
         />
       </View>
       <Text className="text-foreground flex-1 text-sm font-medium" numberOfLines={1}>

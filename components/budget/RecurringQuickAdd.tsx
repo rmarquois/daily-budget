@@ -30,7 +30,7 @@ export function RecurringQuickAdd({ type, suggestions, onAdd }: RecurringQuickAd
 
   return (
     <View>
-      <View className="flex-row gap-2">
+      <View className="flex-row items-center gap-2">
         <Input
           className="flex-1"
           value={label}
