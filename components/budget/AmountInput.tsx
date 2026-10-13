@@ -21,9 +21,6 @@ export function AmountInput({
   size = 'lg',
 }: AmountInputProps) {
   const color = tone === 'success' ? 'text-success' : 'text-foreground'
-  // Size the field to its content so the € sign sits right next to the number.
-  const charWidth = size === 'lg' ? 36 : 24
-  const inputStyle = { width: Math.max(1, (value || '0').length) * charWidth + 12 }
   return (
     <View className="flex-row items-center justify-center">
       <TextInput
@@ -33,10 +30,9 @@ export function AmountInput({
         keyboardType="decimal-pad"
         inputMode="decimal"
         autoFocus={autoFocus}
-        style={inputStyle}
         className={cn(
           'font-display placeholder:text-muted-foreground web:outline-none text-center tracking-tight',
-          size === 'lg' ? 'text-6xl' : 'text-4xl',
+          size === 'lg' ? 'text-6xl leading-[72px]' : 'text-4xl leading-[48px]',
           color
         )}
       />
