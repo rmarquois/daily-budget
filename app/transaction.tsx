@@ -171,9 +171,12 @@ export default function TransactionScreen() {
               </Pressable>
             </View>
             {date > today ? (
-              <Text className="text-muted-foreground mt-2 text-xs">
-                Dépense prévue : elle sera déduite de ce jour-là.
-              </Text>
+              <View className="mt-2 flex flex-row items-center justify-center gap-2">
+                <LucideIcon name="Info" size={12} className="text-muted-foreground" />
+                <Text className="text-muted-foreground text-xs">
+                  Dépense prévue : elle sera déduite de ce jour-là.
+                </Text>
+              </View>
             ) : null}
           </View>
         </ScrollView>
