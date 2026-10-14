@@ -40,6 +40,7 @@ export const EXPENSE_CATEGORIES: CategoryDef[] = [
   { id: 'leisure', label: 'Loisirs', icon: 'Ticket', color: '#D7CDEF' },
   { id: 'health', label: 'Santé', icon: 'HeartPulse', color: '#EBCBD2' },
   { id: 'home', label: 'Maison', icon: 'Sofa', color: '#E5CCB5' },
+  { id: 'cash', label: 'Retraits', icon: 'Banknote', color: '#C9D0E8' },
   { id: 'travel', label: 'Voyages', icon: 'Plane', color: '#B9DDE0' },
   { id: 'family', label: 'Famille', icon: 'Baby', color: '#EBCBD2' },
   { id: 'gifts', label: 'Cadeaux', icon: 'Gift', color: '#E8C4CC' },
