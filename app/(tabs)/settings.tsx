@@ -9,7 +9,6 @@ import { Card } from '@/components/ui/card'
 import { Text } from '@/components/ui/text'
 import { useBudgetStore } from '@/lib/budget/store'
 import LucideIcon, { type IconName } from '@/lib/icons/LucideIcon'
-import { useColorScheme } from '@/lib/useColorScheme'
 import { cn } from '@/lib/utils'
 
 export default function SettingsScreen() {

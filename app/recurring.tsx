@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
-import { Pressable, ScrollView, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
@@ -13,7 +13,6 @@ import { RECURRING_EXPENSE_CATEGORIES, RECURRING_INCOME_CATEGORIES } from '@/lib
 import { useBudgetStore } from '@/lib/budget/store'
 import type { FlowType } from '@/lib/budget/types'
 import { amountToInput, parseAmount } from '@/lib/format'
-import LucideIcon from '@/lib/icons/LucideIcon'
 import { closeModal } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
