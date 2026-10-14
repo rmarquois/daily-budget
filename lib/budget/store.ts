@@ -58,12 +58,32 @@ function buildDemo() {
   return {
     periodStartDay: 25,
     recurring: [
-      { id: uid(), type: 'income', label: 'Salaire', amount: 2350 },
-      { id: uid(), type: 'expense', label: 'Loyer', amount: 780 },
-      { id: uid(), type: 'expense', label: 'Électricité & internet', amount: 95 },
-      { id: uid(), type: 'expense', label: 'Téléphone', amount: 15 },
-      { id: uid(), type: 'expense', label: 'Assurances', amount: 60 },
-      { id: uid(), type: 'expense', label: 'Épargne', amount: 300 },
+      { id: uid(), type: 'income', label: 'Salaire principal', categoryId: 'salary', amount: 2350 },
+      {
+        id: uid(),
+        type: 'expense',
+        label: 'Loyer appartement',
+        categoryId: 'housing',
+        amount: 780,
+      },
+      { id: uid(), type: 'expense', label: 'Électricité', categoryId: 'utilities', amount: 65 },
+      { id: uid(), type: 'expense', label: 'Internet maison', categoryId: 'telecom', amount: 30 },
+      { id: uid(), type: 'expense', label: 'Forfait mobile', categoryId: 'telecom', amount: 15 },
+      {
+        id: uid(),
+        type: 'expense',
+        label: 'Assurance habitation',
+        categoryId: 'insurance',
+        amount: 20,
+      },
+      { id: uid(), type: 'expense', label: 'Mutuelle santé', categoryId: 'health', amount: 40 },
+      {
+        id: uid(),
+        type: 'expense',
+        label: 'Épargne mensuelle',
+        categoryId: 'savings',
+        amount: 300,
+      },
     ] as RecurringItem[],
     transactions: [
       tx(0, 'Boulangerie', 4.6, 'food'),

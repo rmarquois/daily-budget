@@ -3,6 +3,7 @@ import * as React from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 
 import { AmountInput } from '@/components/budget/AmountInput'
+import { CategoryTag } from '@/components/budget/CategoryTag'
 import { FieldLabel } from '@/components/budget/FieldLabel'
 import { SegmentedControl } from '@/components/budget/SegmentedControl'
 import { Button } from '@/components/ui/button'
@@ -44,7 +45,7 @@ export default function TransactionScreen() {
 
   const changeType = (next: FlowType) => {
     setType(next)
-    setCategoryId(next === 'expense' ? 'food' : 'extra')
+    setCategoryId(next === 'expense' ? 'food' : 'sales')
   }
 
   const save = () => {
@@ -107,35 +108,14 @@ export default function TransactionScreen() {
         <View className="mt-6">
           <FieldLabel>Catégorie</FieldLabel>
           <View className="flex-row flex-wrap gap-2">
-            {categories.map((c) => {
-              const active = c.id === categoryId
-              return (
-                <Pressable
-                  key={c.id}
-                  onPress={() => setCategoryId(c.id)}
-                  className={cn(
-                    'flex-row items-center gap-1.5 rounded-full border px-3 py-2',
-                    active
-                      ? 'border-primary bg-primary'
-                      : 'border-border bg-background active:bg-accent'
-                  )}
-                >
-                  <LucideIcon
-                    name={c.icon}
-                    size={14}
-                    className={active ? 'text-primary-foreground' : 'text-muted-foreground'}
-                  />
-                  <Text
-                    className={cn(
-                      'text-sm',
-                      active ? 'text-primary-foreground font-medium' : 'text-foreground'
-                    )}
-                  >
-                    {c.label}
-                  </Text>
-                </Pressable>
-              )
-            })}
+            {categories.map((c) => (
+              <CategoryTag
+                key={c.id}
+                category={c}
+                active={c.id === categoryId}
+                onPress={() => setCategoryId(c.id)}
+              />
+            ))}
           </View>
         </View>
 

@@ -7,6 +7,7 @@ export interface RecurringItem {
   id: string
   type: FlowType
   label: string
+  categoryId: string
   amount: number
 }
 

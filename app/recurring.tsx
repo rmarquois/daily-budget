@@ -3,30 +3,19 @@ import * as React from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 
 import { AmountInput } from '@/components/budget/AmountInput'
+import { CategoryTag } from '@/components/budget/CategoryTag'
 import { FieldLabel } from '@/components/budget/FieldLabel'
 import { SegmentedControl } from '@/components/budget/SegmentedControl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
+import { RECURRING_EXPENSE_CATEGORIES, RECURRING_INCOME_CATEGORIES } from '@/lib/budget/categories'
 import { useBudgetStore } from '@/lib/budget/store'
 import type { FlowType } from '@/lib/budget/types'
 import { amountToInput, parseAmount } from '@/lib/format'
+import LucideIcon from '@/lib/icons/LucideIcon'
 import { closeModal } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
-
-const SUGGESTIONS: Record<FlowType, string[]> = {
-  income: ['Salaire', 'Prime', 'Allocations', 'Loyer perçu', 'Pension'],
-  expense: [
-    'Loyer',
-    'Crédit',
-    'Électricité',
-    'Internet',
-    'Téléphone',
-    'Assurance',
-    'Abonnements',
-    'Épargne',
-  ],
-}
 
 export default function RecurringScreen() {
   const params = useLocalSearchParams<{ id?: string; type?: FlowType }>()
@@ -40,6 +29,7 @@ export default function RecurringScreen() {
     existing?.type ?? (params.type === 'income' ? 'income' : 'expense')
   )
   const [label, setLabel] = React.useState(existing?.label ?? '')
+  const [categoryId, setCategoryId] = React.useState(existing?.categoryId ?? 'food')
   const [amount, setAmount] = React.useState(existing ? amountToInput(existing.amount) : '')
   const [confirmDelete, setConfirmDelete] = React.useState(false)
 
@@ -48,7 +38,7 @@ export default function RecurringScreen() {
 
   const save = () => {
     if (!canSave || !parsed) return
-    upsertRecurring({ id: existing?.id, type, label: label.trim(), amount: parsed })
+    upsertRecurring({ id: existing?.id, type, label: label.trim(), categoryId, amount: parsed })
     closeModal('/budget')
   }
 
@@ -88,24 +78,25 @@ export default function RecurringScreen() {
           <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
         </View>
 
-        <FieldLabel>Nom</FieldLabel>
+        <FieldLabel>Description</FieldLabel>
         <Input
           value={label}
           onChangeText={setLabel}
-          placeholder={type === 'income' ? 'Ex. Salaire' : 'Ex. Loyer'}
+          placeholder={type === 'income' ? 'Ex. Salaire principal' : 'Ex. Loyer appartement'}
           returnKeyType="done"
           onSubmitEditing={save}
         />
         <View className="mt-3 flex-row flex-wrap gap-2">
-          {SUGGESTIONS[type].map((s) => (
-            <Pressable
-              key={s}
-              onPress={() => setLabel(s)}
-              className="bg-muted rounded-full px-3 py-1.5 active:opacity-70"
-            >
-              <Text className="text-muted-foreground text-xs">{s}</Text>
-            </Pressable>
-          ))}
+          {(type === 'income' ? RECURRING_INCOME_CATEGORIES : RECURRING_EXPENSE_CATEGORIES).map(
+            (c) => (
+              <CategoryTag
+                key={c.id}
+                category={c}
+                active={c.id === categoryId}
+                onPress={() => setCategoryId(c.id)}
+              />
+            )
+          )}
         </View>
       </ScrollView>
 

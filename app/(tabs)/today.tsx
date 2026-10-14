@@ -106,20 +106,17 @@ export default function TodayScreen() {
           />
           <Card className="overflow-hidden">
             {todayTransactions.length === 0 ? (
-              <Pressable
-                onPress={() => router.push('/transaction')}
-                className="active:bg-accent items-center px-6 py-8"
-              >
+              <View className="active:bg-accent items-center px-6 py-8">
                 <View className="bg-muted mb-3 h-11 w-11 items-center justify-center rounded-full">
-                  <LucideIcon name="Receipt" size={20} className="text-muted-foreground" />
+                  <LucideIcon name="Inbox" size={20} className="text-muted-foreground" />
                 </View>
                 <Text className="text-foreground text-sm font-medium">
                   Rien de noté aujourd'hui
                 </Text>
                 <Text className="text-muted-foreground mt-1 text-center text-xs">
-                  Touchez ici ou le bouton + pour ajouter une dépense.
+                  Retrouvez ici l'ensemble de vos dépenses du jour
                 </Text>
-              </Pressable>
+              </View>
             ) : (
               todayTransactions.map((t, i) => (
                 <TransactionRow

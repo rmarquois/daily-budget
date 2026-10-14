@@ -1,6 +1,7 @@
 import { Pressable, View } from 'react-native'
 
 import { Text } from '@/components/ui/text'
+import { getCategory } from '@/lib/budget/categories'
 import type { RecurringItem } from '@/lib/budget/types'
 import { formatMoney } from '@/lib/format'
 import LucideIcon from '@/lib/icons/LucideIcon'
@@ -9,11 +10,11 @@ import { cn } from '@/lib/utils'
 interface RecurringRowProps {
   item: RecurringItem
   onPress?: () => void
-  onRemove?: () => void
   isLast?: boolean
 }
 
-export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowProps) {
+export function RecurringRow({ item, onPress, isLast }: RecurringRowProps) {
+  const category = getCategory(item.categoryId)
   const isIncome = item.type === 'income'
 
   return (
@@ -27,14 +28,14 @@ export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowPr
     >
       <View
         className={cn(
-          'h-8 w-8 items-center justify-center rounded-full',
-          isIncome ? 'bg-green-50' : 'bg-red-50'
+          'h-9 w-9 items-center justify-center rounded-full',
+          isIncome ? 'bg-green-50' : 'bg-muted'
         )}
       >
         <LucideIcon
-          name={isIncome ? 'ArrowDownLeft' : 'ArrowUpRight'}
-          size={16}
-          className={isIncome ? 'text-success' : 'text-destructive'}
+          name={category.icon}
+          size={17}
+          className={isIncome ? 'text-success' : 'text-foreground'}
         />
       </View>
       <Text className="text-foreground flex-1 text-sm font-medium" numberOfLines={1}>
@@ -44,17 +45,6 @@ export function RecurringRow({ item, onPress, onRemove, isLast }: RecurringRowPr
         {isIncome ? '+' : '−'}
         {formatMoney(item.amount)}
       </Text>
-      {onRemove ? (
-        <Pressable
-          onPress={onRemove}
-          accessibilityLabel={`Supprimer ${item.label}`}
-          className="active:bg-accent -mr-2 h-8 w-8 items-center justify-center rounded-md"
-        >
-          <LucideIcon name="X" size={16} className="text-muted-foreground" />
-        </Pressable>
-      ) : (
-        <LucideIcon name="ChevronRight" size={16} className="text-muted-foreground" />
-      )}
     </Pressable>
   )
 }

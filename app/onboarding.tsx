@@ -3,15 +3,13 @@ import * as React from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 
 import { PeriodDayPicker } from '@/components/budget/PeriodDayPicker'
-import { RecurringQuickAdd } from '@/components/budget/RecurringQuickAdd'
-import { RecurringRow } from '@/components/budget/RecurringRow'
+import { RecurringSection } from '@/components/budget/RecurringSection'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Text } from '@/components/ui/text'
 import { formatLongDay, todayKey } from '@/lib/budget/dates'
 import { getPeriod, periodBudget, sumRecurring } from '@/lib/budget/engine'
 import { useBudgetStore } from '@/lib/budget/store'
-import type { FlowType } from '@/lib/budget/types'
 import { formatMoney } from '@/lib/format'
 import LucideIcon from '@/lib/icons/LucideIcon'
 import { cn } from '@/lib/utils'
@@ -122,44 +120,18 @@ export default function OnboardingScreen() {
         {current === 'income' || current === 'expense' ? (
           <>
             <StepTitle
-              title={current === 'income' ? 'Vos revenus réguliers' : 'Vos dépenses fixes'}
+              title={
+                current === 'income'
+                  ? 'Quels sont vos revenus réguliers ?'
+                  : 'Quelles sont vos dépenses fixes ?'
+              }
               text={
                 current === 'income'
-                  ? 'Ce que vous touchez chaque période : salaire, allocations, pension…'
-                  : 'Ce qui part chaque période : loyer, factures, abonnements, épargne…'
+                  ? 'Ajoutez vos revenus mensuels pour calculer votre budget et connaître votre capacité à épargner.'
+                  : 'Renseignez vos charges régulières pour déterminer ce qu’il vous reste chaque mois.'
               }
             />
-            <RecurringQuickAdd
-              type={current}
-              suggestions={
-                current === 'income'
-                  ? ['Salaire', 'Prime', 'Allocations', 'Pension']
-                  : [
-                      'Loyer',
-                      'Électricité',
-                      'Internet',
-                      'Téléphone',
-                      'Assurance',
-                      'Abonnements',
-                      'Épargne',
-                    ]
-              }
-              onAdd={(label, amount) =>
-                store.upsertRecurring({ type: current as FlowType, label, amount })
-              }
-            />
-            {items.length > 0 ? (
-              <Card className="mt-6 overflow-hidden">
-                {items.map((item, i) => (
-                  <RecurringRow
-                    key={item.id}
-                    item={item}
-                    isLast={i === items.length - 1}
-                    onRemove={() => store.removeRecurring(item.id)}
-                  />
-                ))}
-              </Card>
-            ) : null}
+            <RecurringSection type={current} items={items} />
           </>
         ) : null}
 

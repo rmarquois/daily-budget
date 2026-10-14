@@ -109,13 +109,13 @@ export default function HistoryScreen() {
           </View>
         )}
         ListEmptyComponent={
-          <View className="flex-1 items-center justify-center">
+          <View className="flex-1 items-center justify-center p-4">
             <View className="bg-muted mb-3 h-12 w-12 items-center justify-center rounded-full">
               <LucideIcon name="Inbox" size={22} className="text-muted-foreground" />
             </View>
             <Text className="text-foreground text-sm font-medium">Aucune opération</Text>
             <Text className="text-muted-foreground mt-1 text-center text-xs">
-              Les dépenses que vous notez sur cette période apparaîtront ici.
+              Retrouvez ici l'ensemble de vos dépenses sur la période choisie
             </Text>
           </View>
         }
