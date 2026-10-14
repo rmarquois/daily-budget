@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useMemo } from 'react'
 import { TextInput, View } from 'react-native'
 
 import { Text } from '@/components/ui/text'
@@ -9,22 +8,13 @@ interface AmountInputProps {
   value: string
   onChangeText: (value: string) => void
   autoFocus?: boolean
-  tone?: 'default' | 'success'
   size?: 'lg' | 'md'
 }
 
 /** Large, centred money input accepting "12,50" or "12.50". */
-export function AmountInput({
-  value,
-  onChangeText,
-  autoFocus,
-  tone = 'default',
-  size = 'lg',
-}: AmountInputProps) {
+export function AmountInput({ value, onChangeText, autoFocus, size = 'lg' }: AmountInputProps) {
   const numericCharWidth = size === 'lg' ? 40 : 24
   const dotCharWidth = size === 'lg' ? 16 : 8
-
-  const color = tone === 'success' ? 'text-success' : 'text-foreground'
 
   const inputWidth =
     value.length > 0
@@ -55,9 +45,8 @@ export function AmountInput({
         maxLength={7}
         style={{ width: inputWidth }}
         className={cn(
-          'font-display placeholder:text-muted-foreground web:outline-none w-full text-center tracking-tight',
-          size === 'lg' ? 'text-6xl leading-[72px]' : 'text-4xl leading-[48px]',
-          color
+          'font-display placeholder:text-muted-foreground web:outline-none text-foreground w-full text-center tracking-tight',
+          size === 'lg' ? 'text-6xl leading-[72px]' : 'text-4xl leading-[48px]'
         )}
       />
       <Text

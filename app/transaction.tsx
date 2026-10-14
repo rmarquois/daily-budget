@@ -86,12 +86,7 @@ export default function TransactionScreen() {
         />
 
         <View className="py-8">
-          <AmountInput
-            value={amount}
-            onChangeText={setAmount}
-            autoFocus={!existing}
-            tone={type === 'income' ? 'success' : 'default'}
-          />
+          <AmountInput value={amount} onChangeText={setAmount} autoFocus={!existing} />
         </View>
 
         <FieldLabel>Description</FieldLabel>

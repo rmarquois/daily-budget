@@ -84,12 +84,7 @@ export default function RecurringScreen() {
         />
 
         <View className="py-8">
-          <AmountInput
-            value={amount}
-            onChangeText={setAmount}
-            autoFocus={!existing}
-            tone={type === 'income' ? 'success' : 'default'}
-          />
+          <AmountInput value={amount} onChangeText={setAmount} autoFocus={!existing} />
           <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
         </View>
 
