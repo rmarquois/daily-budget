@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@/lib/budget/categories'
 import { addDays, formatRelativeDay, todayKey } from '@/lib/budget/dates'
+import { getPeriod } from '@/lib/budget/engine'
 import { useBudgetStore } from '@/lib/budget/store'
 import type { FlowType } from '@/lib/budget/types'
 import { amountToInput, parseAmount } from '@/lib/format'
@@ -19,6 +20,7 @@ import { cn } from '@/lib/utils'
 
 export default function TransactionScreen() {
   const { id } = useLocalSearchParams<{ id?: string }>()
+  const periodStartDay = useBudgetStore((s) => s.periodStartDay)
   const existing = useBudgetStore((s) => (id ? s.transactions.find((t) => t.id === id) : undefined))
   const upsertTransaction = useBudgetStore((s) => s.upsertTransaction)
   const removeTransaction = useBudgetStore((s) => s.removeTransaction)
@@ -31,8 +33,14 @@ export default function TransactionScreen() {
   const [date, setDate] = React.useState(existing?.date ?? today)
   const [confirmDelete, setConfirmDelete] = React.useState(false)
 
+  const title = existing ? 'Modifier' : type === 'expense' ? 'Nouvelle dépense' : 'Nouvelle rentrée'
+
   const categories = type === 'expense' ? EXPENSE_CATEGORIES : INCOME_CATEGORIES
   const parsed = parseAmount(amount)
+
+  const period = getPeriod(date, periodStartDay)
+  const canGoPrev = date > period.start
+  const canGoNext = date < today
 
   const changeType = (next: FlowType) => {
     setType(next)
@@ -61,8 +69,6 @@ export default function TransactionScreen() {
     removeTransaction(existing.id)
     closeModal()
   }
-
-  const title = existing ? 'Modifier' : type === 'expense' ? 'Nouvelle dépense' : 'Nouvelle rentrée'
 
   return (
     <View className="bg-background py-safe flex-1">
@@ -138,10 +144,18 @@ export default function TransactionScreen() {
           <View className="border-input h-12 flex-row items-center rounded-md border">
             <Pressable
               onPress={() => setDate((d) => addDays(d, -1))}
+              disabled={!canGoPrev}
               accessibilityLabel="Jour précédent"
-              className="active:bg-accent h-full w-12 items-center justify-center"
+              className={cn(
+                'h-full w-12 items-center justify-center',
+                canGoPrev ? 'active:bg-accent' : undefined
+              )}
             >
-              <LucideIcon name="ChevronLeft" size={18} className="text-foreground" />
+              <LucideIcon
+                name="ChevronLeft"
+                size={18}
+                className={!canGoPrev ? 'text-muted-foreground' : 'text-foreground'}
+              />
             </Pressable>
             <Pressable onPress={() => setDate(today)} className="flex-1 items-center">
               <Text className="text-foreground text-sm font-medium">
@@ -155,20 +169,20 @@ export default function TransactionScreen() {
             </Pressable>
             <Pressable
               onPress={() => setDate((d) => addDays(d, 1))}
+              disabled={!canGoNext}
               accessibilityLabel="Jour suivant"
-              className="active:bg-accent h-full w-12 items-center justify-center"
+              className={cn(
+                'h-full w-12 items-center justify-center',
+                canGoNext ? 'active:bg-accent' : undefined
+              )}
             >
-              <LucideIcon name="ChevronRight" size={18} className="text-foreground" />
+              <LucideIcon
+                name="ChevronRight"
+                size={18}
+                className={!canGoNext ? 'text-muted-foreground' : 'text-foreground'}
+              />
             </Pressable>
           </View>
-          {date > today ? (
-            <View className="mt-2 flex flex-row items-center justify-center gap-2">
-              <LucideIcon name="Info" size={12} className="text-muted-foreground" />
-              <Text className="text-muted-foreground text-xs">
-                Dépense prévue : elle sera déduite de ce jour-là.
-              </Text>
-            </View>
-          ) : null}
         </View>
       </ScrollView>
 
