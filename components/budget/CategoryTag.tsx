@@ -19,7 +19,7 @@ export function CategoryTag({ category, active, onPress }: CategoryTagProps) {
       style={{ backgroundColor: category.color }}
       className={cn(
         'flex-row items-center gap-1.5 rounded-full border px-3 py-2',
-        active ? 'border-primary bg-primary' : 'border-border active:bg-accent'
+        active ? 'border-muted-foreground bg-primary' : 'active:bg-accent border-transparent'
       )}
     >
       <LucideIcon name={category.icon} size={14} className="text-foreground" />
