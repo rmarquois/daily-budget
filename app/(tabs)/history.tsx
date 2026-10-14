@@ -1,26 +1,23 @@
-import { router } from 'expo-router'
 import * as React from 'react'
-import { Pressable, SectionList, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 
+import { HistoryChart } from '@/components/budget/HistoryChart'
+import { HistoryList } from '@/components/budget/HistoryList'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
-import { TransactionRow } from '@/components/budget/TransactionRow'
+import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
-import { addDays, formatRelativeDay, formatShortDay, type DayKey } from '@/lib/budget/dates'
+import { addDays, formatShortDay } from '@/lib/budget/dates'
 import { getPeriod } from '@/lib/budget/engine'
 import { useToday } from '@/lib/budget/hooks'
 import { useBudgetStore } from '@/lib/budget/store'
-import type { Transaction } from '@/lib/budget/types'
 import { formatMoney } from '@/lib/format'
 import LucideIcon from '@/lib/icons/LucideIcon'
-import { cn } from '@/lib/utils'
 
-interface DaySection {
-  day: DayKey
-  net: number
-  data: Transaction[]
-}
+type HistoryPresentationType = 'list' | 'chart'
 
 export default function HistoryScreen() {
+  const [presentationType, setPresentationType] = React.useState<HistoryPresentationType>('list')
+
   const today = useToday()
   const transactions = useBudgetStore((s) => s.transactions)
   const periodStartDay = useBudgetStore((s) => s.periodStartDay)
@@ -28,28 +25,36 @@ export default function HistoryScreen() {
   const period = getPeriod(anchor, periodStartDay)
   const isCurrent = today >= period.start && today <= period.end
 
-  const { sections, total } = React.useMemo(() => {
-    const byDay = new Map<DayKey, Transaction[]>()
-    for (const t of transactions) {
-      if (t.date < period.start || t.date > period.end) continue
-      const list = byDay.get(t.date) ?? []
-      list.push(t)
-      byDay.set(t.date, list)
-    }
-    let sum = 0
-    const result: DaySection[] = [...byDay.entries()]
-      .sort(([a], [b]) => (a < b ? 1 : -1))
-      .map(([day, list]) => {
-        const net = list.reduce((s, t) => s + (t.type === 'expense' ? t.amount : -t.amount), 0)
-        sum += net
-        return { day, net, data: list.sort((a, b) => b.createdAt - a.createdAt) }
-      })
-    return { sections: result, total: sum }
-  }, [transactions, period.start, period.end])
+  const transactionsForPeriod = React.useMemo(() => {
+    return transactions.filter((transaction) => {
+      return transaction.date >= period.start && transaction.date <= period.end
+    })
+  }, [transactions, period])
+
+  const total = React.useMemo(() => {
+    return transactionsForPeriod.reduce((sum, transaction) => {
+      return sum + transaction.amount
+    }, 0)
+  }, [transactionsForPeriod])
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScreenHeader eyebrow="Vos opérations" title="Historique" />
+      <ScreenHeader
+        eyebrow="Vos opérations"
+        title="Historique"
+        right={
+          <Button
+            variant="outline"
+            onPress={() => setPresentationType(presentationType === 'list' ? 'chart' : 'list')}
+          >
+            <LucideIcon
+              name={presentationType === 'chart' ? 'List' : 'ChartPie'}
+              size={20}
+              className="text-primary"
+            />
+          </Button>
+        }
+      />
 
       <View className="border-border mx-5 mb-2 flex-row items-center rounded-xl border p-1.5">
         <Pressable
@@ -77,50 +82,12 @@ export default function HistoryScreen() {
         </Pressable>
       </View>
 
-      <SectionList
-        sections={sections}
-        keyExtractor={(t) => t.id}
-        stickySectionHeadersEnabled={false}
-        renderSectionHeader={({ section }) => (
-          <View className="mb-2 mt-5 flex-row items-center justify-between px-1">
-            <Text className="text-foreground text-sm font-semibold">
-              {formatRelativeDay(section.day, today)}
-            </Text>
-            <Text className="text-muted-foreground text-xs">
-              {section.net >= 0 ? '−' : '+'}
-              {formatMoney(Math.abs(section.net))}
-            </Text>
-          </View>
-        )}
-        renderItem={({ item, index, section }) => (
-          <View
-            className={cn(
-              'border-border bg-card overflow-hidden border-x',
-              index === 0 && 'rounded-t-lg border-t',
-              index === section.data.length - 1 && 'rounded-b-lg border-b'
-            )}
-          >
-            <TransactionRow
-              transaction={item}
-              isLast={index === section.data.length - 1}
-              onPress={() => router.push({ pathname: '/transaction', params: { id: item.id } })}
-            />
-          </View>
-        )}
-        ListEmptyComponent={
-          <View className="flex-1 items-center justify-center p-4">
-            <View className="bg-muted mb-3 h-12 w-12 items-center justify-center rounded-full">
-              <LucideIcon name="Inbox" size={22} className="text-muted-foreground" />
-            </View>
-            <Text className="text-foreground text-sm font-medium">Aucune opération</Text>
-            <Text className="text-muted-foreground mt-1 text-center text-xs">
-              Retrouvez ici l'ensemble de vos dépenses sur la période choisie
-            </Text>
-          </View>
-        }
-        className="flex-1"
-        contentContainerClassName="px-4 pb-4 grow"
-      />
+      {presentationType === 'list' && (
+        <HistoryList transactions={transactionsForPeriod} period={period} />
+      )}
+      {presentationType === 'chart' && (
+        <HistoryChart transactions={transactionsForPeriod} total={total} />
+      )}
     </View>
   )
 }
