@@ -29,7 +29,7 @@ export default function TodayScreen() {
         <View className="px-5">
           {noBudget ? (
             <Pressable onPress={() => router.push('/budget')}>
-              <Card className="border-warning/40 bg-warning/10 mb-4 flex-row items-center gap-3 p-4">
+              <Card className="mb-4 flex-row items-center gap-3 border-orange-300 bg-orange-50 p-4">
                 <LucideIcon name="TriangleAlert" size={18} className="text-warning" />
                 <Text className="text-foreground flex-1 text-sm">
                   Ajoutez vos revenus récurrents pour calculer votre budget quotidien.

@@ -21,7 +21,7 @@ export function TransactionRow({ transaction, onPress, isLast }: TransactionRowP
     <Pressable
       onPress={onPress}
       className={cn(
-        'active:bg-accent web:hover:bg-accent/60 flex-row items-center gap-3 px-4 py-3',
+        'active:bg-accent web:hover:bg-accent flex-row items-center gap-3 px-4 py-3',
         !isLast && 'border-border border-b'
       )}
     >
