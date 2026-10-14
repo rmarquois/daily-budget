@@ -27,16 +27,10 @@ export function RecurringRow({ item, onPress, isLast }: RecurringRowProps) {
       )}
     >
       <View
-        className={cn(
-          'h-9 w-9 items-center justify-center rounded-full',
-          isIncome ? 'bg-green-50' : 'bg-muted'
-        )}
+        style={{ backgroundColor: category.color }}
+        className="h-9 w-9 items-center justify-center rounded-full"
       >
-        <LucideIcon
-          name={category.icon}
-          size={17}
-          className={isIncome ? 'text-success' : 'text-foreground'}
-        />
+        <LucideIcon name={category.icon} size={17} className="text-foreground" />
       </View>
       <Text className="text-foreground flex-1 text-sm font-medium" numberOfLines={1}>
         {item.label}

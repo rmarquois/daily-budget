@@ -16,24 +16,14 @@ export function CategoryTag({ category, active, onPress }: CategoryTagProps) {
   return (
     <Pressable
       onPress={onPress}
+      style={{ backgroundColor: category.color }}
       className={cn(
         'flex-row items-center gap-1.5 rounded-full border px-3 py-2',
-        active ? 'border-primary bg-primary' : 'border-border bg-background active:bg-accent'
+        active ? 'border-primary bg-primary' : 'border-border active:bg-accent'
       )}
     >
-      <LucideIcon
-        name={category.icon}
-        size={14}
-        className={active ? 'text-primary-foreground' : 'text-muted-foreground'}
-      />
-      <Text
-        className={cn(
-          'text-sm',
-          active ? 'text-primary-foreground font-medium' : 'text-foreground'
-        )}
-      >
-        {category.label}
-      </Text>
+      <LucideIcon name={category.icon} size={14} className="text-foreground" />
+      <Text className="text-foreground text-sm">{category.label}</Text>
     </Pressable>
   )
 }

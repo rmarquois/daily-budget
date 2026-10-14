@@ -26,16 +26,10 @@ export function TransactionRow({ transaction, onPress, isLast }: TransactionRowP
       )}
     >
       <View
-        className={cn(
-          'h-9 w-9 items-center justify-center rounded-full',
-          isIncome ? 'bg-green-50' : 'bg-muted'
-        )}
+        style={{ backgroundColor: category.color }}
+        className="h-9 w-9 items-center justify-center rounded-full"
       >
-        <LucideIcon
-          name={category.icon}
-          size={17}
-          className={isIncome ? 'text-success' : 'text-foreground'}
-        />
+        <LucideIcon name={category.icon} size={17} className="text-foreground" />
       </View>
       <View className="flex-1">
         <Text className="text-foreground text-sm font-medium" numberOfLines={1}>
