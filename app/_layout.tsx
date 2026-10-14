@@ -21,6 +21,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import * as React from 'react'
 import { Platform, View } from 'react-native'
 
+import { DemoBanner } from '@/components/budget/DemoBanner'
 import { WebPortalContext } from '@/components/WebPortalContext'
 import { useColorScheme } from '@/lib/useColorScheme'
 import { ThemeProvider, useTheme } from '@/theming/ThemeProvider'
@@ -162,7 +163,10 @@ export default function RootLayout() {
       initialThemeName={isDarkColorScheme ? 'dark' : 'light'}
       themes={[lightTheme, darkTheme]}
     >
-      <RootContent />
+      <View className="flex-1">
+        <DemoBanner />
+        <RootContent />
+      </View>
     </ThemeProvider>
   )
 }

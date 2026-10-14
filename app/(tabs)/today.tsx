@@ -1,7 +1,6 @@
 import { router } from 'expo-router'
 import { Pressable, ScrollView, View } from 'react-native'
 
-import { DemoBadge } from '@/components/budget/DemoBadge'
 import { ProgressBar } from '@/components/budget/ProgressBar'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
 import { SectionTitle } from '@/components/budget/SectionTitle'
@@ -25,7 +24,7 @@ export default function TodayScreen() {
   return (
     <View className="bg-background pt-safe flex-1">
       <ScrollView contentContainerClassName="pb-26" showsVerticalScrollIndicator={false}>
-        <ScreenHeader eyebrow={formatLongDay(today)} title="Aujourd'hui" right={<DemoBadge />} />
+        <ScreenHeader eyebrow={formatLongDay(today)} title="Aujourd'hui" />
 
         <View className="px-5">
           {noBudget ? (

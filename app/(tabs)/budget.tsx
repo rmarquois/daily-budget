@@ -1,6 +1,5 @@
 import { ScrollView, View } from 'react-native'
 
-import { DemoBadge } from '@/components/budget/DemoBadge'
 import { RecurringSection } from '@/components/budget/RecurringSection'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
 import { Card } from '@/components/ui/card'
@@ -25,7 +24,7 @@ export default function BudgetScreen() {
   return (
     <View className="bg-background pt-safe flex-1">
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <ScreenHeader eyebrow="Chaque période" title="Budget" right={<DemoBadge />} />
+        <ScreenHeader eyebrow="Chaque période" title="Budget" />
 
         <View className="px-5 pb-5">
           <Card className="p-5">

@@ -1,8 +1,7 @@
 import { router } from 'expo-router'
 import * as React from 'react'
-import { Pressable, SectionList, StyleSheet, View } from 'react-native'
+import { Pressable, SectionList, View } from 'react-native'
 
-import { DemoBadge } from '@/components/budget/DemoBadge'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
 import { TransactionRow } from '@/components/budget/TransactionRow'
 import { Text } from '@/components/ui/text'
@@ -50,7 +49,7 @@ export default function HistoryScreen() {
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScreenHeader eyebrow="Vos opérations" title="Historique" right={<DemoBadge />} />
+      <ScreenHeader eyebrow="Vos opérations" title="Historique" />
 
       <View className="border-border mx-5 mb-2 flex-row items-center rounded-xl border p-1.5">
         <Pressable
