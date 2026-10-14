@@ -31,7 +31,7 @@ export default function BudgetScreen() {
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <ScreenHeader eyebrow="Chaque période" title="Budget" right={<DemoBadge />} />
 
-        <View className="px-5">
+        <View className="px-5 pb-5">
           <Card className="p-5">
             <Text className="text-muted-foreground text-sm">Reste pour vivre par période</Text>
             <Text

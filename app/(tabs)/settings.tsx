@@ -35,7 +35,7 @@ export default function SettingsScreen() {
         <ScreenHeader eyebrow="Préférences" title="Réglages" />
 
         <View className="px-5">
-          <SectionTitle title="Période budgétaire" />
+          <SectionTitle title="Période budgétaire" className="mt-0" />
           <Card className="p-4">
             <Text className="text-muted-foreground mb-4 text-xs leading-5">
               Choisissez le jour où votre mois redémarre, par exemple le jour où tombe votre salaire
@@ -66,11 +66,11 @@ export default function SettingsScreen() {
             </Pressable>
           </Card>
           <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
-            Vos données restent sur votre téléphone (ou dans ce navigateur). Elles ne sont pas
-            synchronisées entre appareils.
+            Vos données restent sur votre téléphone. Elles ne sont pas synchronisées entre
+            appareils.
           </Text>
 
-          <Text className="text-muted-foreground my-10 text-center text-xs">
+          <Text className="text-muted-foreground mb-5 mt-10 text-center text-xs">
             Daily Budget · v1.0
           </Text>
         </View>

@@ -120,7 +120,7 @@ export default function HistoryScreen() {
           </View>
         }
         className="flex-1"
-        contentContainerClassName="p-4 grow"
+        contentContainerClassName="px-4 pb-4 grow"
       />
     </View>
   )
