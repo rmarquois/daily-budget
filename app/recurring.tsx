@@ -5,7 +5,6 @@ import { ScrollView, View } from 'react-native'
 import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
 import { FieldLabel } from '@/components/budget/FieldLabel'
-import { SegmentedControl } from '@/components/budget/SegmentedControl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
@@ -24,9 +23,8 @@ export default function RecurringScreen() {
   const upsertRecurring = useBudgetStore((s) => s.upsertRecurring)
   const removeRecurring = useBudgetStore((s) => s.removeRecurring)
 
-  const [type, setType] = React.useState<FlowType>(
-    existing?.type ?? (params.type === 'income' ? 'income' : 'expense')
-  )
+  const type = existing?.type ?? (params.type === 'income' ? 'income' : 'expense')
+
   const [label, setLabel] = React.useState(existing?.label ?? '')
   const [categoryId, setCategoryId] = React.useState(existing?.categoryId ?? 'salary')
   const [amount, setAmount] = React.useState(existing ? amountToInput(existing.amount) : '')
@@ -63,15 +61,6 @@ export default function RecurringScreen() {
         }}
       />
       <ScrollView contentContainerClassName="px-5 pb-6 pt-4" keyboardShouldPersistTaps="handled">
-        <SegmentedControl
-          value={type}
-          onChange={setType}
-          options={[
-            { value: 'income', label: 'Revenu' },
-            { value: 'expense', label: 'Dépense fixe' },
-          ]}
-        />
-
         <View className="py-8">
           <AmountInput value={amount} onChangeText={setAmount} autoFocus={!existing} />
           <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
