@@ -122,7 +122,9 @@ export default function TodayScreen() {
                   key={t.id}
                   transaction={t}
                   isLast={i === todayTransactions.length - 1}
-                  onPress={() => router.push({ pathname: '/transaction', params: { id: t.id } })}
+                  onPress={() => {
+                    router.push({ pathname: '/transaction', params: { id: t.id, edit: 'true' } })
+                  }}
                 />
               ))
             )}

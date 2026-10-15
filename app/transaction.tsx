@@ -20,7 +20,7 @@ import { closeModal } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
 export default function TransactionScreen() {
-  const { id } = useLocalSearchParams<{ id?: string }>()
+  const { id, edit } = useLocalSearchParams<{ id?: string; edit?: string }>()
   const periodStartDay = useBudgetStore((s) => s.periodStartDay)
   const existing = useBudgetStore((s) => (id ? s.transactions.find((t) => t.id === id) : undefined))
   const upsertTransaction = useBudgetStore((s) => s.upsertTransaction)
@@ -83,14 +83,16 @@ export default function TransactionScreen() {
         contentContainerClassName="px-5 pb-6 pt-4"
         keyboardShouldPersistTaps="handled"
       >
-        <SegmentedControl
-          value={type}
-          onChange={changeType}
-          options={[
-            { value: 'expense', label: 'Dépense' },
-            { value: 'income', label: 'Revenu' },
-          ]}
-        />
+        {edit !== 'true' && (
+          <SegmentedControl
+            value={type}
+            onChange={changeType}
+            options={[
+              { value: 'expense', label: 'Dépense' },
+              { value: 'income', label: 'Revenu' },
+            ]}
+          />
+        )}
 
         <View className="py-8">
           <AmountInput value={amount} onChangeText={setAmount} autoFocus={!existing} />

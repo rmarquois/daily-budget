@@ -72,7 +72,9 @@ export function HistoryList({
           <TransactionRow
             transaction={item}
             isLast={index === section.data.length - 1}
-            onPress={() => router.push({ pathname: '/transaction', params: { id: item.id } })}
+            onPress={() => {
+              router.push({ pathname: '/transaction', params: { id: item.id, edit: 'true' } })
+            }}
           />
         </View>
       )}
