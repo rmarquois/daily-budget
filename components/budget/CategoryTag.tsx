@@ -8,22 +8,24 @@ import { cn } from '@/lib/utils'
 
 interface CategoryTagProps {
   category: CategoryDef
-  active: boolean
+  activeCategoryId: string
   onPress: () => void
 }
 
-export function CategoryTag({ category, active, onPress }: CategoryTagProps) {
+export function CategoryTag({ category, activeCategoryId, onPress }: CategoryTagProps) {
   return (
     <Pressable
       onPress={onPress}
       style={{ backgroundColor: category.color }}
       className={cn(
-        'flex-row items-center gap-1.5 rounded-full border px-3 py-2',
-        active ? 'border-muted-foreground bg-primary' : 'active:bg-accent border-transparent'
+        'flex-row items-center gap-1.5 rounded-full px-3 py-2',
+        activeCategoryId !== undefined && activeCategoryId !== category.id
+          ? 'opacity-60'
+          : undefined
       )}
     >
-      <LucideIcon name={category.icon} size={14} className="text-foreground" />
-      <Text className="text-foreground text-sm">{category.label}</Text>
+      <LucideIcon name={category.icon} size={14} className="text-black" />
+      <Text className="text-sm text-black">{category.label}</Text>
     </Pressable>
   )
 }

@@ -112,7 +112,7 @@ export default function TransactionScreen() {
               <CategoryTag
                 key={c.id}
                 category={c}
-                active={c.id === categoryId}
+                activeCategoryId={categoryId}
                 onPress={() => setCategoryId(c.id)}
               />
             ))}
