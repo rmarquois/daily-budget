@@ -30,9 +30,7 @@ export default function SettingsScreen() {
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <ScreenHeader eyebrow="Préférences" title="Réglages" />
-
+      <ScrollView className="flex-1">
         <View className="px-5">
           <SectionTitle title="Période budgétaire" className="mt-0" />
           <Card className="p-4">
@@ -65,8 +63,8 @@ export default function SettingsScreen() {
             </Pressable>
           </Card>
           <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
-            Vos données restent sur votre téléphone. Elles ne sont pas synchronisées entre
-            appareils.
+            Vos données sont stockées localement sur votre téléphone. Elles ne sont pas
+            synchronisées avec d'autres appareils.
           </Text>
 
           <Text className="text-muted-foreground mb-5 mt-10 text-center text-xs">

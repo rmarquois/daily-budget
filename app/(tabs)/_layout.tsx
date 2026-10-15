@@ -31,10 +31,6 @@ export default function TabsLayout() {
         options={{ title: 'Historique', tabBarIcon: tabIcon('History') }}
       />
       <Tabs.Screen name="budget" options={{ title: 'Budget', tabBarIcon: tabIcon('Repeat') }} />
-      <Tabs.Screen
-        name="settings"
-        options={{ title: 'Réglages', tabBarIcon: tabIcon('Settings2') }}
-      />
     </Tabs>
   )
 }

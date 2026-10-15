@@ -131,6 +131,7 @@ function RootContent() {
             name="recurring"
             options={{ presentation: 'modal', title: 'Élément récurrent' }}
           />
+          <Stack.Screen name="settings" options={{ presentation: 'modal', title: 'Réglages' }} />
         </Stack>
         {
           // View used as a portal container on web

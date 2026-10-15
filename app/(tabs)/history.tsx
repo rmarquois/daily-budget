@@ -4,7 +4,6 @@ import { Pressable, View } from 'react-native'
 import { HistoryChart } from '@/components/budget/HistoryChart'
 import { HistoryList } from '@/components/budget/HistoryList'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
-import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { addDays, formatShortDay } from '@/lib/budget/dates'
 import { getPeriod } from '@/lib/budget/engine'
@@ -13,11 +12,7 @@ import { useBudgetStore } from '@/lib/budget/store'
 import { formatMoney } from '@/lib/format'
 import LucideIcon from '@/lib/icons/LucideIcon'
 
-type HistoryPresentationType = 'list' | 'chart'
-
 export default function HistoryScreen() {
-  const [presentationType, setPresentationType] = React.useState<HistoryPresentationType>('list')
-
   const today = useToday()
   const transactions = useBudgetStore((s) => s.transactions)
   const periodStartDay = useBudgetStore((s) => s.periodStartDay)
@@ -39,22 +34,7 @@ export default function HistoryScreen() {
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScreenHeader
-        eyebrow="Vos opérations"
-        title="Historique"
-        right={
-          <Button
-            variant="outline"
-            onPress={() => setPresentationType(presentationType === 'list' ? 'chart' : 'list')}
-          >
-            <LucideIcon
-              name={presentationType === 'chart' ? 'List' : 'ChartPie'}
-              size={20}
-              className="text-primary"
-            />
-          </Button>
-        }
-      />
+      <ScreenHeader eyebrow="Vos opérations" title="Historique" />
 
       <View className="border-border mx-5 mb-2 flex-row items-center rounded-xl border p-1.5">
         <Pressable
