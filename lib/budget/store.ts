@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from 'react'
 import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
+import { mmkvStorage } from 'zustand-mmkv-storage'
 
 import { addDays, todayKey } from './dates'
 import type { RecurringItem, Transaction } from './types'
@@ -130,9 +130,9 @@ export const useBudgetStore = create<BudgetState>()(
       resetAll: () => set({ ...initialData }),
     }),
     {
-      name: 'simple-daily-budget',
+      name: 'daily-budget',
       version: 1,
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => mmkvStorage),
     }
   )
 )
