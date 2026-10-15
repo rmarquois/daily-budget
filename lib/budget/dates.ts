@@ -48,7 +48,7 @@ const MONTHS = [
   'novembre',
   'décembre',
 ]
-const MONTHS_SHORT = [
+export const MONTHS_SHORT = [
   'janv.',
   'févr.',
   'mars',
@@ -74,7 +74,7 @@ export function formatLongDay(key: DayKey): string {
 /** "1 oct." */
 export function formatShortDay(key: DayKey): string {
   const d = fromDayKey(key)
-  return `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`
+  return `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}`
 }
 
 /** "Mer." */

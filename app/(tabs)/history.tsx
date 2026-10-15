@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Pressable, View } from 'react-native'
 
-import { HistoryChart } from '@/components/budget/HistoryChart'
 import { HistoryList } from '@/components/budget/HistoryList'
 import { ScreenHeader } from '@/components/budget/ScreenHeader'
 import { Text } from '@/components/ui/text'
@@ -11,6 +10,7 @@ import { useToday } from '@/lib/budget/hooks'
 import { useBudgetStore } from '@/lib/budget/store'
 import { formatMoney } from '@/lib/format'
 import LucideIcon from '@/lib/icons/LucideIcon'
+import { cn } from '@/lib/utils'
 
 export default function HistoryScreen() {
   const today = useToday()
@@ -54,20 +54,23 @@ export default function HistoryScreen() {
           </Text>
         </Pressable>
         <Pressable
+          disabled={isCurrent}
           onPress={() => setAnchor(addDays(period.end, 1))}
           accessibilityLabel="Période suivante"
-          className="active:bg-accent h-10 w-10 items-center justify-center rounded-lg"
+          className={cn(
+            'h-10 w-10 items-center justify-center rounded-lg',
+            !isCurrent && 'active:bg-accent'
+          )}
         >
-          <LucideIcon name="ChevronRight" size={18} className="text-foreground" />
+          <LucideIcon
+            name="ChevronRight"
+            size={18}
+            className={isCurrent ? 'text-muted-foreground' : 'text-foreground'}
+          />
         </Pressable>
       </View>
 
-      {presentationType === 'list' && (
-        <HistoryList transactions={transactionsForPeriod} period={period} />
-      )}
-      {presentationType === 'chart' && (
-        <HistoryChart transactions={transactionsForPeriod} total={total} />
-      )}
+      <HistoryList transactions={transactionsForPeriod} period={period} />
     </View>
   )
 }
