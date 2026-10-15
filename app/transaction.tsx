@@ -88,7 +88,7 @@ export default function TransactionScreen() {
           onChange={changeType}
           options={[
             { value: 'expense', label: 'Dépense' },
-            { value: 'income', label: 'Rentrée d’argent' },
+            { value: 'income', label: 'Revenu' },
           ]}
         />
 
