@@ -1,13 +1,22 @@
 import * as React from 'react'
 import { View } from 'react-native'
 import { DonutChart } from 'react-native-chart-kit/v2'
+import { CartesianChartTheme } from 'react-native-chart-kit/v2'
 
 import { Text } from '@/components/ui/text'
 import { getCategory } from '@/lib/budget/categories'
 import { RecurringItem } from '@/lib/budget/types'
 import { formatMoney } from '@/lib/format'
 
-export function BudgetChart({ width, recurring }: { width: number; recurring: RecurringItem[] }) {
+export function BudgetChart({
+  recurring,
+  width,
+  theme,
+}: {
+  recurring: RecurringItem[]
+  width: number
+  theme: CartesianChartTheme
+}) {
   const data = React.useMemo(() => {
     const totalByCategory = recurring.reduce(
       (prev, { categoryId, amount, type }) => {
@@ -52,6 +61,7 @@ export function BudgetChart({ width, recurring }: { width: number; recurring: Re
       interaction={{
         mode: 'tap',
       }}
+      theme={theme}
     />
   ) : null
 }

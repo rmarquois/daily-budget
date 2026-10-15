@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import { DonutChart } from 'react-native-chart-kit/v2'
+import { CartesianChartTheme, DonutChart } from 'react-native-chart-kit/v2'
 
 import { Text } from '@/components/ui/text'
 import { getCategory } from '@/lib/budget/categories'
@@ -8,11 +8,13 @@ import { Transaction } from '@/lib/budget/types'
 import { formatMoney } from '@/lib/format'
 
 export function PeriodChart({
-  width,
   transactions,
+  width,
+  theme,
 }: {
-  width: number
   transactions: Transaction[]
+  width: number
+  theme: CartesianChartTheme
 }) {
   const data = React.useMemo(() => {
     const totalByCategory = transactions.reduce(
@@ -57,6 +59,7 @@ export function PeriodChart({
       interaction={{
         mode: 'tap',
       }}
+      theme={theme}
     />
   ) : null
 }

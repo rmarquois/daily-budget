@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import { BarChart, BarChartSeries } from 'react-native-chart-kit/v2'
+import { BarChart, BarChartSeries, CartesianChartTheme } from 'react-native-chart-kit/v2'
 
 import { Text } from '@/components/ui/text'
 import { fromDayKey, MONTHS_SHORT } from '@/lib/budget/dates'
@@ -8,13 +8,15 @@ import { useBudgetOverview, useToday } from '@/lib/budget/hooks'
 import { type Transaction } from '@/lib/budget/types'
 
 export function YearChart({
-  width,
   transactions,
   onSelect,
+  width,
+  theme,
 }: {
-  width: number
   transactions: Transaction[]
   onSelect: (month: number | undefined, budget: boolean) => void
+  width: number
+  theme: CartesianChartTheme
 }) {
   const today = useToday()
   const todayMonth = fromDayKey(today).getMonth()
@@ -76,13 +78,14 @@ export function YearChart({
           }}
           legend={false}
           showValuesOnTopOfBars
+          theme={theme}
         />
       )}
       <View className="mt-2 flex-row items-center justify-center gap-4">
         {series.map((value) => (
           <View key={value.yKey} className="flex-row items-center gap-2">
             <View style={{ backgroundColor: value.color }} className="h-4 w-4 rounded-full" />
-            <Text>{value.label}</Text>
+            <Text className="text-muted-foreground">{value.label}</Text>
           </View>
         ))}
       </View>
