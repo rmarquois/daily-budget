@@ -23,9 +23,9 @@ export default function TodayScreen() {
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScrollView contentContainerClassName="pb-26" showsVerticalScrollIndicator={false}>
-        <ScreenHeader eyebrow={formatLongDay(today)} title="Aujourd'hui" />
+      <ScreenHeader eyebrow={formatLongDay(today)} title="Aujourd'hui" />
 
+      <ScrollView contentContainerClassName="pb-26">
         <View className="px-5">
           {noBudget ? (
             <Pressable onPress={() => router.push('/budget')}>

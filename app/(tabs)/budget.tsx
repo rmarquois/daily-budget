@@ -23,34 +23,32 @@ export default function BudgetScreen() {
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <ScreenHeader eyebrow="Chaque période" title="Budget" />
+      <ScreenHeader eyebrow="Chaque période" title="Budget" />
 
-        <View className="px-5 pb-5">
-          <Card className="p-5">
-            <Text className="text-muted-foreground text-sm">Reste pour vivre par période</Text>
-            <Text
-              className={cn(
-                'font-display mt-1 text-4xl tracking-tight',
-                budget < 0 ? 'text-destructive' : 'text-foreground'
-              )}
-            >
-              {formatMoney(budget)}
-            </Text>
-            <Text className="text-muted-foreground mt-1 text-xs">
-              Soit environ {formatMoney(budget / period.totalDays)} par jour du{' '}
-              {formatShortDay(period.start)} au {formatShortDay(period.end)}
-            </Text>
+      <ScrollView className="flex-1" contentContainerClassName="px-5 pb-5">
+        <Card className="p-5">
+          <Text className="text-muted-foreground text-sm">Reste à vivre par période</Text>
+          <Text
+            className={cn(
+              'font-display mt-1 text-4xl tracking-tight',
+              budget < 0 ? 'text-destructive' : 'text-foreground'
+            )}
+          >
+            {formatMoney(budget)}
+          </Text>
+          <Text className="text-muted-foreground mt-1 text-xs">
+            Soit environ {formatMoney(budget / period.totalDays)} par jour du{' '}
+            {formatShortDay(period.start)} au {formatShortDay(period.end)}
+          </Text>
 
-            <View className="border-border mt-5 gap-2 border-t pt-4">
-              <Line label="Revenus" value={`+${formatMoney(income)}`} tone="success" />
-              <Line label="Dépenses fixes" value={`−${formatMoney(expense)}`} />
-            </View>
-          </Card>
+          <View className="border-border mt-5 gap-2 border-t pt-4">
+            <Line label="Revenus" value={`+${formatMoney(income)}`} tone="success" />
+            <Line label="Dépenses fixes" value={`−${formatMoney(expense)}`} />
+          </View>
+        </Card>
 
-          <RecurringSection type="income" items={incomes} />
-          <RecurringSection type="expense" items={expenses} />
-        </View>
+        <RecurringSection type="income" items={incomes} />
+        <RecurringSection type="expense" items={expenses} />
       </ScrollView>
     </View>
   )
