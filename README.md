@@ -26,7 +26,7 @@ No account, no cross-device synchronization.
 
 ## Tech
 
-Expo + Expo Router, TypeScript, NativeWind, React Native Reusables, Zustand + AsyncStorage.
+Expo + Expo Router, TypeScript, NativeWind, React Native Reusables, Zustand + MMKV.
 
 See `CLAUDE.md` for the architecture and calculation rules.
 
