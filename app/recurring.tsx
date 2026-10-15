@@ -28,7 +28,7 @@ export default function RecurringScreen() {
     existing?.type ?? (params.type === 'income' ? 'income' : 'expense')
   )
   const [label, setLabel] = React.useState(existing?.label ?? '')
-  const [categoryId, setCategoryId] = React.useState(existing?.categoryId ?? 'food')
+  const [categoryId, setCategoryId] = React.useState(existing?.categoryId ?? 'salary')
   const [amount, setAmount] = React.useState(existing ? amountToInput(existing.amount) : '')
   const [confirmDelete, setConfirmDelete] = React.useState(false)
 
