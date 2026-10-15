@@ -1,18 +1,36 @@
 module.exports = {
+  name: 'Daily Budget',
+  slug: 'daily-budget',
+  scheme: 'daily-budget',
+  version: '1.0.0',
+  orientation: 'portrait',
+  userInterfaceStyle: 'automatic',
+  icon: './assets/images/icon.png',
+  splash: {
+    image: './assets/images/splash.png',
+    resizeMode: 'contain',
+    backgroundColor: '#ffffff',
+  },
+  ios: {
+    supportsTablet: true,
+    bundleIdentifier: 'fr.rmarquois.daily.budget',
+    buildNumber: '1',
+  },
+  platforms: ['ios', 'android', 'web'],
   android: {
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',
       backgroundColor: '#ffffff',
     },
-    package: 'fr.rmarquois.daily-budget',
+    package: 'fr.rmarquois.daily.budget',
     versionCode: 1,
   },
+  web: { bundler: 'metro', output: 'single', favicon: './assets/images/favicon.png' },
   assetBundlePatterns: ['**/*'],
-  experiments: { typedRoutes: true, tsconfigPaths: true },
-  icon: './assets/images/icon.png',
-  ios: { supportsTablet: true, bundleIdentifier: 'fr.rmarquois.daily-budget', buildNumber: '1' },
-  name: 'Daily Budget',
-  orientation: 'portrait',
+  experiments: {
+    typedRoutes: true,
+    tsconfigPaths: true,
+  },
   plugins: [
     'expo-asset',
     'expo-font',
@@ -23,15 +41,9 @@ module.exports = {
     'expo-video',
     'expo-web-browser',
   ],
-  scheme: 'new-app',
-  slug: 'new-app',
-  splash: {
-    image: './assets/images/splash.png',
-    resizeMode: 'contain',
-    backgroundColor: '#ffffff',
+  extra: {
+    eas: {
+      projectId: 'fcfdaedc-5bb5-4809-bd73-d618d36b18b6',
+    },
   },
-  userInterfaceStyle: 'automatic',
-  version: 'share',
-  web: { bundler: 'metro', output: 'single', favicon: './assets/images/favicon.png' },
-  platforms: ['ios', 'android', 'web'],
 }
