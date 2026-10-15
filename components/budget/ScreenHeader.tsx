@@ -25,7 +25,7 @@ export function ScreenHeader({ eyebrow, title }: ScreenHeaderProps) {
       <Button
         variant="outline"
         onPress={() => router.push('/settings')}
-        className="h-10 w-10 rounded-full p-2"
+        className="native:w-12 w-10 rounded-full p-2"
       >
         <LucideIcon name="Settings2" />
       </Button>
