@@ -46,6 +46,7 @@ export function AmountInput({ value, onChangeText, autoFocus, size = 'lg' }: Amo
           keyboardType="decimal-pad"
           inputMode="decimal"
           autoFocus={autoFocus}
+          multiline
           maxLength={7}
           underlineColorAndroid="transparent"
           className={cn('w-full text-center', textClassName)}
