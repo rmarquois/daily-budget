@@ -1,15 +1,18 @@
+import Constants from 'expo-constants'
 import { router } from 'expo-router'
 import * as React from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 
 import { PeriodDayPicker } from '@/components/budget/PeriodDayPicker'
-import { ScreenHeader } from '@/components/budget/ScreenHeader'
 import { SectionTitle } from '@/components/budget/SectionTitle'
 import { Card } from '@/components/ui/card'
 import { Text } from '@/components/ui/text'
 import { useBudgetStore } from '@/lib/budget/store'
 import LucideIcon, { type IconName } from '@/lib/icons/LucideIcon'
 import { cn } from '@/lib/utils'
+
+const appName = Constants.expoConfig?.name
+const appVersion = Constants.expoConfig?.version
 
 export default function SettingsScreen() {
   const periodStartDay = useBudgetStore((s) => s.periodStartDay)
@@ -30,48 +33,46 @@ export default function SettingsScreen() {
 
   return (
     <View className="bg-background pt-safe flex-1">
-      <ScrollView className="flex-1">
-        <View className="px-5">
-          <SectionTitle title="Période budgétaire" className="mt-0" />
-          <Card className="p-4">
-            <Text className="text-muted-foreground mb-4 text-xs leading-5">
-              Choisissez le jour où votre mois redémarre, par exemple le jour où tombe votre salaire
-              (du 25 au 25, du 30 au 30…).
-            </Text>
-            <PeriodDayPicker value={periodStartDay} onChange={setPeriodStartDay} />
-          </Card>
-
-          <SectionTitle title="Données" />
-          <Card className="overflow-hidden">
-            <Row icon="Smartphone" label="Stockées sur cet appareil" isLast={false}>
-              <LucideIcon name="ShieldCheck" size={16} className="text-success" />
-            </Row>
-            <Pressable onPress={reset} className="active:bg-accent">
-              <Row
-                icon="RotateCcw"
-                label={
-                  confirmReset
-                    ? 'Toucher à nouveau pour tout effacer'
-                    : isDemo
-                      ? 'Quitter l’exemple et commencer'
-                      : 'Tout effacer et recommencer'
-                }
-                destructive
-                confirm={confirmReset}
-                isLast
-              />
-            </Pressable>
-          </Card>
-          <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
-            Vos données sont stockées localement sur votre téléphone. Elles ne sont pas
-            synchronisées avec d'autres appareils.
+      <ScrollView className="flex-1" contentContainerClassName="p-5 pb-safe-offset-16">
+        <SectionTitle title="Période budgétaire" className="mt-0" />
+        <Card className="p-4">
+          <Text className="text-muted-foreground mb-4 text-xs leading-5">
+            Choisissez le jour où votre mois redémarre, par exemple le jour où tombe votre salaire
+            (du 25 au 25, du 30 au 30…).
           </Text>
+          <PeriodDayPicker value={periodStartDay} onChange={setPeriodStartDay} />
+        </Card>
 
-          <Text className="text-muted-foreground mb-5 mt-10 text-center text-xs">
-            Daily Budget · v1.0
-          </Text>
-        </View>
+        <SectionTitle title="Données" />
+        <Card className="overflow-hidden">
+          <Row icon="Smartphone" label="Stockées sur cet appareil" isLast={false}>
+            <LucideIcon name="ShieldCheck" size={16} className="text-success" />
+          </Row>
+          <Pressable onPress={reset} className="active:bg-accent">
+            <Row
+              icon="RotateCcw"
+              label={
+                confirmReset
+                  ? 'Toucher à nouveau pour tout effacer'
+                  : isDemo
+                    ? 'Quitter l’exemple et commencer'
+                    : 'Tout effacer et recommencer'
+              }
+              destructive
+              confirm={confirmReset}
+              isLast
+            />
+          </Pressable>
+        </Card>
+        <Text className="text-muted-foreground mt-2 px-1 text-xs leading-5">
+          Vos données sont stockées localement sur votre téléphone. Elles ne sont pas synchronisées
+          avec d'autres appareils.
+        </Text>
       </ScrollView>
+
+      <Text className="bottom-safe text-muted-foreground absolute left-0 right-0 mb-5 mt-10 text-center text-xs">
+        {`${appName} · v${appVersion}`}
+      </Text>
     </View>
   )
 }
