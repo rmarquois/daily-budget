@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { TextInput, View } from 'react-native'
+import { Platform, TextInput, View } from 'react-native'
 
 import { Text } from '@/components/ui/text'
 import { cn } from '@/lib/utils'
@@ -46,7 +46,7 @@ export function AmountInput({ value, onChangeText, autoFocus, size = 'lg' }: Amo
           keyboardType="decimal-pad"
           inputMode="decimal"
           autoFocus={autoFocus}
-          multiline
+          multiline={Platform.OS !== 'web'}
           maxLength={7}
           underlineColorAndroid="transparent"
           className={cn('w-full text-center', textClassName)}
