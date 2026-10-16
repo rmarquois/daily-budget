@@ -20,6 +20,7 @@ import { Stack } from 'expo-router/stack'
 import * as SplashScreen from 'expo-splash-screen'
 import * as React from 'react'
 import { Platform, View } from 'react-native'
+import { KeyboardProvider } from 'react-native-keyboard-controller'
 
 import { WebPortalContext } from '@/components/WebPortalContext'
 import { useColorScheme } from '@/lib/useColorScheme'
@@ -163,7 +164,9 @@ export default function RootLayout() {
       initialThemeName={isDarkColorScheme ? 'dark' : 'light'}
       themes={[lightTheme, darkTheme]}
     >
-      <RootContent />
+      <KeyboardProvider>
+        <RootContent />
+      </KeyboardProvider>
     </ThemeProvider>
   )
 }

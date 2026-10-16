@@ -1,6 +1,8 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
+import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
@@ -16,7 +18,10 @@ import { closeModal } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
 export default function RecurringScreen() {
+  const { bottom } = useSafeAreaInsets()
+
   const params = useLocalSearchParams<{ id?: string; type?: FlowType }>()
+
   const existing = useBudgetStore((s) =>
     params.id ? s.recurring.find((r) => r.id === params.id) : undefined
   )
@@ -50,7 +55,7 @@ export default function RecurringScreen() {
   }
 
   return (
-    <View className="bg-background py-safe flex-1">
+    <View className="bg-background pb-safe flex-1">
       <Stack.Screen
         options={{
           title: existing
@@ -60,8 +65,14 @@ export default function RecurringScreen() {
               : 'Dépense récurrente',
         }}
       />
-      <ScrollView contentContainerClassName="px-5 pb-6 pt-4" keyboardShouldPersistTaps="handled">
-        <View className="py-8">
+      <KeyboardAwareScrollView
+        mode="layout"
+        keyboardShouldPersistTaps="handled"
+        extraKeyboardSpace={-bottom}
+        className="flex-1"
+        contentContainerClassName="px-5 pb-5"
+      >
+        <View className="py-2">
           <AmountInput value={amount} onChangeText={setAmount} autoFocus={!existing} />
           <Text className="text-muted-foreground mt-1 text-center text-xs">par période</Text>
         </View>
@@ -74,21 +85,28 @@ export default function RecurringScreen() {
           returnKeyType="done"
           onSubmitEditing={save}
         />
-        <View className="mt-3 flex-row flex-wrap gap-2">
-          {(type === 'income' ? RECURRING_INCOME_CATEGORIES : RECURRING_EXPENSE_CATEGORIES).map(
-            (c) => (
-              <CategoryTag
-                key={c.id}
-                category={c}
-                activeCategoryId={categoryId}
-                onPress={() => setCategoryId(c.id)}
-              />
-            )
-          )}
-        </View>
-      </ScrollView>
 
-      <View className="border-border gap-2 border-t px-5 pb-3 pt-3">
+        <View className="mt-4">
+          <FieldLabel>Catégorie</FieldLabel>
+          <View className="flex-row flex-wrap gap-2">
+            {(type === 'income' ? RECURRING_INCOME_CATEGORIES : RECURRING_EXPENSE_CATEGORIES).map(
+              (c) => (
+                <CategoryTag
+                  key={c.id}
+                  category={c}
+                  activeCategoryId={categoryId}
+                  onPress={() => setCategoryId(c.id)}
+                />
+              )
+            )}
+          </View>
+        </View>
+      </KeyboardAwareScrollView>
+
+      <KeyboardStickyView
+        offset={{ opened: bottom }}
+        className="bg-background border-border gap-2 border-t px-5 pb-3 pt-3"
+      >
         <Button size="lg" onPress={save} disabled={!canSave}>
           <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
         </Button>
@@ -99,7 +117,7 @@ export default function RecurringScreen() {
             </Text>
           </Button>
         ) : null}
-      </View>
+      </KeyboardStickyView>
     </View>
   )
 }

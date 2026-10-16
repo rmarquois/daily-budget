@@ -1,6 +1,8 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import * as React from 'react'
-import { Pressable, ScrollView, View } from 'react-native'
+import { Pressable, View } from 'react-native'
+import { KeyboardAwareScrollView, KeyboardStickyView } from 'react-native-keyboard-controller'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
@@ -20,6 +22,8 @@ import { closeModal } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
 export default function TransactionScreen() {
+  const { bottom } = useSafeAreaInsets()
+
   const { id, edit } = useLocalSearchParams<{ id?: string; edit?: string }>()
   const periodStartDay = useBudgetStore((s) => s.periodStartDay)
   const existing = useBudgetStore((s) => (id ? s.transactions.find((t) => t.id === id) : undefined))
@@ -72,17 +76,14 @@ export default function TransactionScreen() {
   }
 
   return (
-    <View className="bg-background py-safe flex-1">
+    <View className="bg-background pb-safe flex-1">
       <Stack.Screen
         options={{
           title,
         }}
       />
-      <ScrollView
-        className="flex-1"
-        contentContainerClassName="px-5 pb-6 pt-4"
-        keyboardShouldPersistTaps="handled"
-      >
+
+      <View className="px-5">
         {edit !== 'true' && (
           <SegmentedControl
             value={type}
@@ -93,8 +94,16 @@ export default function TransactionScreen() {
             ]}
           />
         )}
+      </View>
 
-        <View className="py-8">
+      <KeyboardAwareScrollView
+        mode="layout"
+        keyboardShouldPersistTaps="handled"
+        extraKeyboardSpace={-bottom}
+        className="flex-1"
+        contentContainerClassName="px-5 pb-5"
+      >
+        <View className="py-4">
           <AmountInput value={amount} onChangeText={setAmount} autoFocus={!existing} />
         </View>
 
@@ -107,7 +116,7 @@ export default function TransactionScreen() {
           onSubmitEditing={save}
         />
 
-        <View className="mt-6">
+        <View className="mt-4">
           <FieldLabel>Catégorie</FieldLabel>
           <View className="flex-row flex-wrap gap-2">
             {categories.map((c) => (
@@ -166,9 +175,12 @@ export default function TransactionScreen() {
             </Pressable>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
-      <View className="border-border gap-2 border-t px-5 pb-3 pt-3">
+      <KeyboardStickyView
+        offset={{ opened: bottom }}
+        className="bg-background border-border gap-2 border-t px-5 pb-3 pt-3"
+      >
         <Button size="lg" onPress={save} disabled={!parsed}>
           <Text>{existing ? 'Enregistrer' : 'Ajouter'}</Text>
         </Button>
@@ -179,7 +191,7 @@ export default function TransactionScreen() {
             </Text>
           </Button>
         ) : null}
-      </View>
+      </KeyboardStickyView>
     </View>
   )
 }
