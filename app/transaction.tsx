@@ -6,10 +6,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
+import { DescriptionInput } from '@/components/budget/DescriptionInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
 import { SegmentedControl } from '@/components/budget/SegmentedControl'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@/lib/budget/categories'
 import { addDays, formatRelativeDay, todayKey } from '@/lib/budget/dates'
@@ -25,6 +25,7 @@ export default function TransactionScreen() {
   const { bottom } = useSafeAreaInsets()
 
   const { id, edit } = useLocalSearchParams<{ id?: string; edit?: string }>()
+  const transactions = useBudgetStore((s) => s.transactions)
   const periodStartDay = useBudgetStore((s) => s.periodStartDay)
   const existing = useBudgetStore((s) => (id ? s.transactions.find((t) => t.id === id) : undefined))
   const upsertTransaction = useBudgetStore((s) => s.upsertTransaction)
@@ -108,12 +109,11 @@ export default function TransactionScreen() {
         </View>
 
         <FieldLabel>Description</FieldLabel>
-        <Input
+        <DescriptionInput
+          suggestions={transactions.map(({ label }) => label)}
           value={label}
           onChangeText={setLabel}
           placeholder={type === 'expense' ? 'Ex. Boulangerie' : 'Ex. Vente Vinted'}
-          returnKeyType="done"
-          onSubmitEditing={save}
         />
 
         <View className="mt-4">

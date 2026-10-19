@@ -6,9 +6,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
+import { DescriptionInput } from '@/components/budget/DescriptionInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Text } from '@/components/ui/text'
 import { RECURRING_EXPENSE_CATEGORIES, RECURRING_INCOME_CATEGORIES } from '@/lib/budget/categories'
 import { useBudgetStore } from '@/lib/budget/store'
@@ -22,6 +22,7 @@ export default function RecurringScreen() {
 
   const params = useLocalSearchParams<{ id?: string; type?: FlowType }>()
 
+  const recurring = useBudgetStore((s) => s.recurring)
   const existing = useBudgetStore((s) =>
     params.id ? s.recurring.find((r) => r.id === params.id) : undefined
   )
@@ -78,12 +79,11 @@ export default function RecurringScreen() {
         </View>
 
         <FieldLabel>Description</FieldLabel>
-        <Input
+        <DescriptionInput
+          suggestions={recurring.map(({ label }) => label)}
           value={label}
           onChangeText={setLabel}
           placeholder={type === 'income' ? 'Ex. Salaire principal' : 'Ex. Loyer appartement'}
-          returnKeyType="done"
-          onSubmitEditing={save}
         />
 
         <View className="mt-4">
