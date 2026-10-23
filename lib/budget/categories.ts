@@ -21,14 +21,17 @@ export const RECURRING_INCOME_CATEGORIES: CategoryDef[] = [
 export const RECURRING_EXPENSE_CATEGORIES: CategoryDef[] = [
   { id: 'housing', label: 'Logement', icon: 'House', color: '#E5CCB5' },
   { id: 'utilities', label: 'Énergie', icon: 'Zap', color: '#F0E1B5' },
-  { id: 'telecom', label: 'Internet', icon: 'Wifi', color: '#C5D7EA' },
+  { id: 'telecom', label: 'Téléphone et Internet', icon: 'Wifi', color: '#C5D7EA' },
   { id: 'insurance', label: 'Assurance', icon: 'ShieldCheck', color: '#DADDE2' },
   { id: 'transport', label: 'Transport', icon: 'CarFront', color: '#C5D7EA' },
   { id: 'subscriptions', label: 'Abonnements', icon: 'Repeat', color: '#D7CDEF' },
   { id: 'loans', label: 'Crédits', icon: 'Landmark', color: '#C9D0E8' },
+  { id: 'bank_fees', label: 'Frais bancaires', icon: 'Landmark', color: '#C9D0E8' },
+  { id: 'taxes', label: 'Impôts et taxes', icon: 'Landmark', color: '#E8C4CC' },
   { id: 'family', label: 'Famille', icon: 'Users', color: '#EBCBD2' },
   { id: 'health', label: 'Santé', icon: 'HeartPulse', color: '#EBCBD2' },
   { id: 'savings', label: 'Épargne', icon: 'PiggyBank', color: '#BFE0D5' },
+  { id: 'donations', label: 'Dons', icon: 'HandHeart', color: '#BFE0D5' },
   { id: 'other', label: 'Autre', icon: 'CircleEllipsis', color: '#DADDE2' },
 ]
 
@@ -44,7 +47,9 @@ export const EXPENSE_CATEGORIES: CategoryDef[] = [
   { id: 'travel', label: 'Voyages', icon: 'Plane', color: '#B9DDE0' },
   { id: 'family', label: 'Famille', icon: 'Baby', color: '#EBCBD2' },
   { id: 'gifts', label: 'Cadeaux', icon: 'Gift', color: '#E8C4CC' },
+  { id: 'donations', label: 'Dons', icon: 'HandHeart', color: '#BFE0D5' },
   { id: 'repairs', label: 'Réparations', icon: 'Wrench', color: '#DADDE2' },
+  { id: 'taxes', label: 'Impôts et taxes', icon: 'ReceiptText', color: '#E8C4CC' },
   { id: 'admin', label: 'Administratif', icon: 'FileText', color: '#C9D0E8' },
   { id: 'other', label: 'Autre', icon: 'CircleEllipsis', color: '#DADDE2' },
 ]
