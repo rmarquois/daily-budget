@@ -32,13 +32,26 @@ export function RecurringRow({ item, onPress, isLast }: RecurringRowProps) {
       >
         <LucideIcon name={category.icon} size={17} className="text-foreground" />
       </View>
-      <Text className="text-foreground flex-1 text-sm font-medium" numberOfLines={1}>
-        {item.label}
-      </Text>
-      <Text className={cn('text-sm font-semibold', isIncome ? 'text-success' : 'text-foreground')}>
-        {isIncome ? '+' : '−'}
-        {formatMoney(item.amount)}
-      </Text>
+      <View className="flex-1">
+        <Text className="text-foreground text-sm font-medium" numberOfLines={1}>
+          {item.label}
+        </Text>
+        <Text className="text-muted-foreground text-sm">{getCategory(item.categoryId).label}</Text>
+      </View>
+      <View className="items-center">
+        <Text
+          className={cn('text-sm font-semibold', isIncome ? 'text-success' : 'text-foreground')}
+        >
+          {isIncome ? '+' : '−'}
+          {formatMoney(item.amount)}
+        </Text>
+        <Text className="text-muted-foreground text-xs">
+          {`/ `}
+          {item.frequency === 'monthly' && 'mois'}
+          {item.frequency === 'quarterly' && 'trimestre'}
+          {item.frequency === 'yearly' && 'an'}
+        </Text>
+      </View>
     </Pressable>
   )
 }
