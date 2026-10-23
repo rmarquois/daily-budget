@@ -12,15 +12,22 @@ interface SegmentedControlProps<T extends string> {
   value: T
   options: Option<T>[]
   onChange: (value: T) => void
+  secondary?: boolean
 }
 
 export function SegmentedControl<T extends string>({
   value,
   options,
   onChange,
+  secondary = false,
 }: SegmentedControlProps<T>) {
   return (
-    <View className="bg-muted flex-row rounded-lg p-1">
+    <View
+      className={cn(
+        'flex-row rounded-lg p-1.5',
+        secondary ? 'bg-card border-border border' : 'bg-muted'
+      )}
+    >
       {options.map((o) => {
         const active = o.value === value
         return (
@@ -29,7 +36,9 @@ export function SegmentedControl<T extends string>({
             onPress={() => onChange(o.value)}
             className={cn(
               'h-9 flex-1 items-center justify-center rounded-md',
-              active && 'bg-background shadow-sm'
+              active && 'shadow-sm',
+              active && !secondary && 'bg-background',
+              active && secondary && 'bg-muted'
             )}
           >
             <Text
