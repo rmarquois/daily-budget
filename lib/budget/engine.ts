@@ -38,9 +38,21 @@ export function getPeriod(day: DayKey, startDay: number): Period {
   return { start, end, totalDays: diffDays(start, nextStart) }
 }
 
+export function recurringAmountForMonth(item: RecurringItem) {
+  if (item.frequency === 'yearly') return item.amount / 12
+  else if (item.frequency === 'quarterly') return item.amount / 3
+  else return item.amount
+}
+
 export function sumRecurring(items: RecurringItem[]) {
-  const income = items.filter((i) => i.type === 'income').reduce((s, i) => s + i.amount, 0)
-  const expense = items.filter((i) => i.type === 'expense').reduce((s, i) => s + i.amount, 0)
+  const income = items
+    .filter((i) => i.type === 'income')
+    .reduce((s, i) => s + recurringAmountForMonth(i), 0)
+
+  const expense = items
+    .filter((i) => i.type === 'expense')
+    .reduce((s, i) => s + recurringAmountForMonth(i), 0)
+
   return { income, expense, budget: income - expense }
 }
 

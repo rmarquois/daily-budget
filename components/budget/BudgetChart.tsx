@@ -5,6 +5,7 @@ import { CartesianChartTheme } from 'react-native-chart-kit/v2'
 
 import { Text } from '@/components/ui/text'
 import { getCategory } from '@/lib/budget/categories'
+import { recurringAmountForMonth } from '@/lib/budget/engine'
 import { RecurringItem } from '@/lib/budget/types'
 import { formatMoney } from '@/lib/format'
 
@@ -19,8 +20,9 @@ export function BudgetChart({
 }) {
   const data = React.useMemo(() => {
     const totalByCategory = recurring.reduce(
-      (prev, { categoryId, amount, type }) => {
-        prev[categoryId] = (prev[categoryId] ?? 0) + amount * (type === 'expense' ? -1 : 1)
+      (prev, item) => {
+        prev[item.categoryId] = prev[item.categoryId] ?? 0
+        prev[item.categoryId] += recurringAmountForMonth(item) * (item.type === 'expense' ? -1 : 1)
         return prev
       },
       {} as Record<string, number>

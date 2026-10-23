@@ -2,11 +2,14 @@ import type { DayKey } from './dates'
 
 export type FlowType = 'income' | 'expense'
 
+type RecurrenceFrequency = 'monthly' | 'quarterly' | 'yearly'
+
 /** Something that comes in or goes out every period (salary, rent, subscriptions…). */
 export interface RecurringItem {
   id: string
   type: FlowType
   label: string
+  frequency: RecurrenceFrequency
   categoryId: string
   amount: number
 }

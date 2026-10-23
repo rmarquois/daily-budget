@@ -8,6 +8,7 @@ import { AmountInput } from '@/components/budget/AmountInput'
 import { CategoryTag } from '@/components/budget/CategoryTag'
 import { DescriptionInput } from '@/components/budget/DescriptionInput'
 import { FieldLabel } from '@/components/budget/FieldLabel'
+import { SegmentedControl } from '@/components/budget/SegmentedControl'
 import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { RECURRING_EXPENSE_CATEGORIES, RECURRING_INCOME_CATEGORIES } from '@/lib/budget/categories'
@@ -32,6 +33,7 @@ export default function RecurringScreen() {
   const type = existing?.type ?? (params.type === 'income' ? 'income' : 'expense')
 
   const [label, setLabel] = React.useState(existing?.label ?? '')
+  const [frequency, setFrequency] = React.useState(existing?.frequency ?? 'monthly')
   const [categoryId, setCategoryId] = React.useState(existing?.categoryId ?? 'salary')
   const [amount, setAmount] = React.useState(existing ? amountToInput(existing.amount) : '')
   const [confirmDelete, setConfirmDelete] = React.useState(false)
@@ -41,7 +43,14 @@ export default function RecurringScreen() {
 
   const save = () => {
     if (!canSave || !parsed) return
-    upsertRecurring({ id: existing?.id, type, label: label.trim(), categoryId, amount: parsed })
+    upsertRecurring({
+      id: existing?.id,
+      type,
+      label: label.trim(),
+      frequency,
+      categoryId,
+      amount: parsed,
+    })
     closeModal('/budget')
   }
 
@@ -85,6 +94,20 @@ export default function RecurringScreen() {
           onChangeText={setLabel}
           placeholder={type === 'income' ? 'Ex. Salaire principal' : 'Ex. Loyer appartement'}
         />
+
+        <View className="mt-4">
+          <FieldLabel>Fréquence</FieldLabel>
+          <SegmentedControl
+            value={frequency}
+            onChange={setFrequency}
+            options={[
+              { value: 'monthly', label: 'Mensuelle' },
+              { value: 'quarterly', label: 'Trimestrielle' },
+              { value: 'yearly', label: 'Annuelle' },
+            ]}
+            secondary
+          />
+        </View>
 
         <View className="mt-4">
           <FieldLabel>Catégorie</FieldLabel>
