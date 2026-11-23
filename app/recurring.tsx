@@ -111,7 +111,7 @@ export default function RecurringScreen() {
 
         <View className="mt-4">
           <FieldLabel>Catégorie</FieldLabel>
-          <View className="flex-row flex-wrap gap-2">
+          <View className="gap-2">
             {(type === 'income' ? RECURRING_INCOME_CATEGORIES : RECURRING_EXPENSE_CATEGORIES).map(
               (c) => (
                 <CategoryTag

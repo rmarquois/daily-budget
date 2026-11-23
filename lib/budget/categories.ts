@@ -1,77 +1,233 @@
 import type { IconName } from '@/lib/icons/LucideIcon'
 
+type CategoryId =
+  | 'salary'
+  | 'benefits'
+  | 'pensions'
+  | 'capital'
+  | 'housing'
+  | 'bills_subscriptions'
+  | 'transport'
+  | 'insurance_health'
+  | 'loans'
+  | 'taxes_fees'
+  | 'loved_ones'
+  | 'savings'
+  | 'sales'
+  | 'refunds'
+  | 'gifts_received'
+  | 'exceptional'
+  | 'groceries'
+  | 'eating_out'
+  | 'eating_out'
+  | 'shopping'
+  | 'leisure'
+  | 'transport'
+  | 'health'
+  | 'home'
+  | 'unexpected'
+
 export interface CategoryDef {
-  id: string
+  id: CategoryId
   label: string
+  description: string
   icon: IconName
   color: string
 }
 
 export const RECURRING_INCOME_CATEGORIES: CategoryDef[] = [
-  { id: 'salary', label: 'Salaire', icon: 'BriefcaseBusiness', color: '#C5D8C0' },
-  { id: 'benefits', label: 'Allocations', icon: 'HandCoins', color: '#BFE0D5' },
-  { id: 'freelance', label: 'Freelance', icon: 'Laptop', color: '#C5D7EA' },
-  { id: 'bonus', label: 'Primes', icon: 'BadgeEuro', color: '#F0E1B5' },
-  { id: 'rental_income', label: 'Loyers', icon: 'House', color: '#E5CCB5' },
-  { id: 'pension', label: 'Pension', icon: 'Landmark', color: '#B9DDE0' },
-  { id: 'investments', label: 'Placements', icon: 'ChartNoAxesCombined', color: '#D7CDEF' },
-  { id: 'other', label: 'Autre', icon: 'CircleEllipsis', color: '#DADDE2' },
+  {
+    id: 'salary',
+    label: 'Salaire',
+    description: "Salaire, primes régulières, revenus d'indépendant",
+    icon: 'Briefcase',
+    color: '#16A34A',
+  },
+  {
+    id: 'benefits',
+    label: 'Aides et allocations',
+    description: "CAF, APL, chômage, prime d'activité",
+    icon: 'HandHelping',
+    color: '#14B8A6',
+  },
+  {
+    id: 'pensions',
+    label: 'Retraites et pensions',
+    description: "Retraite, pension alimentaire reçue, pension d'invalidité",
+    icon: 'Armchair',
+    color: '#0EA5E9',
+  },
+  {
+    id: 'capital',
+    label: 'Revenus du patrimoine',
+    description: 'Loyers perçus, dividendes, intérêts',
+    icon: 'TrendingUp',
+    color: '#84CC16',
+  },
 ]
 
 export const RECURRING_EXPENSE_CATEGORIES: CategoryDef[] = [
-  { id: 'housing', label: 'Logement', icon: 'House', color: '#E5CCB5' },
-  { id: 'utilities', label: 'Énergie', icon: 'Zap', color: '#F0E1B5' },
-  { id: 'telecom', label: 'Téléphone et Internet', icon: 'Wifi', color: '#C5D7EA' },
-  { id: 'insurance', label: 'Assurance', icon: 'ShieldCheck', color: '#DADDE2' },
-  { id: 'transport', label: 'Transport', icon: 'CarFront', color: '#C5D7EA' },
-  { id: 'subscriptions', label: 'Abonnements', icon: 'Repeat', color: '#D7CDEF' },
-  { id: 'loans', label: 'Crédits', icon: 'Landmark', color: '#C9D0E8' },
-  { id: 'bank_fees', label: 'Frais bancaires', icon: 'Landmark', color: '#C9D0E8' },
-  { id: 'taxes', label: 'Impôts et taxes', icon: 'Landmark', color: '#E8C4CC' },
-  { id: 'family', label: 'Famille', icon: 'Users', color: '#EBCBD2' },
-  { id: 'health', label: 'Santé', icon: 'HeartPulse', color: '#EBCBD2' },
-  { id: 'savings', label: 'Épargne', icon: 'PiggyBank', color: '#BFE0D5' },
-  { id: 'donations', label: 'Dons', icon: 'HandHeart', color: '#BFE0D5' },
-  { id: 'other', label: 'Autre', icon: 'CircleEllipsis', color: '#DADDE2' },
-]
-
-export const EXPENSE_CATEGORIES: CategoryDef[] = [
-  { id: 'food', label: 'Courses', icon: 'ShoppingBasket', color: '#C5D8C0' },
-  { id: 'outings', label: 'Sorties', icon: 'Martini', color: '#F0D1BD' },
-  { id: 'transport', label: 'Transport', icon: 'Car', color: '#C5D7EA' },
-  { id: 'shopping', label: 'Shopping', icon: 'ShoppingBag', color: '#EBCBD2' },
-  { id: 'leisure', label: 'Loisirs', icon: 'Ticket', color: '#D7CDEF' },
-  { id: 'health', label: 'Santé', icon: 'HeartPulse', color: '#EBCBD2' },
-  { id: 'home', label: 'Maison', icon: 'Sofa', color: '#E5CCB5' },
-  { id: 'cash', label: 'Retraits', icon: 'Banknote', color: '#C9D0E8' },
-  { id: 'travel', label: 'Voyages', icon: 'Plane', color: '#B9DDE0' },
-  { id: 'family', label: 'Famille', icon: 'Baby', color: '#EBCBD2' },
-  { id: 'gifts', label: 'Cadeaux', icon: 'Gift', color: '#E8C4CC' },
-  { id: 'donations', label: 'Dons', icon: 'HandHeart', color: '#BFE0D5' },
-  { id: 'repairs', label: 'Réparations', icon: 'Wrench', color: '#DADDE2' },
-  { id: 'taxes', label: 'Impôts et taxes', icon: 'ReceiptText', color: '#E8C4CC' },
-  { id: 'admin', label: 'Administratif', icon: 'FileText', color: '#C9D0E8' },
-  { id: 'other', label: 'Autre', icon: 'CircleEllipsis', color: '#DADDE2' },
+  {
+    id: 'housing',
+    label: 'Logement',
+    description: 'Loyer ou crédit immo, charges de copro, taxe foncière, assurance habitation',
+    icon: 'House',
+    color: '#6366F1',
+  },
+  {
+    id: 'bills_subscriptions',
+    label: 'Factures et abonnements',
+    description: 'Électricité, gaz, eau, internet, mobile, streaming, sport, presse',
+    icon: 'Receipt',
+    color: '#06B6D4',
+  },
+  {
+    id: 'transport',
+    label: 'Transport',
+    description: 'Assurance auto, pass transport, parking, leasing',
+    icon: 'Car',
+    color: '#3B82F6',
+  },
+  {
+    id: 'insurance_health',
+    label: 'Santé et assurances',
+    description: 'Mutuelle, prévoyance, assurances diverses',
+    icon: 'ShieldPlus',
+    color: '#EF4444',
+  },
+  {
+    id: 'loans',
+    label: 'Crédits',
+    description: 'Crédit auto, crédit conso, prêt étudiant',
+    icon: 'CreditCard',
+    color: '#F59E0B',
+  },
+  {
+    id: 'taxes_fees',
+    label: 'Impôts et frais bancaires',
+    description:
+      "Prélèvement à la source, taxe d'habitation, cotisation CB, frais de tenue de compte",
+    icon: 'Landmark',
+    color: '#64748B',
+  },
+  {
+    id: 'loved_ones',
+    label: 'Proches et dons',
+    description: 'Crèche, cantine, pension versée, argent de poche, dons réguliers, associations',
+    icon: 'HeartHandshake',
+    color: '#8B5CF6',
+  },
+  {
+    id: 'savings',
+    label: 'Épargne',
+    description: 'Livret, assurance-vie, PEA, épargne projet',
+    icon: 'PiggyBank',
+    color: '#A855F7',
+  },
 ]
 
 export const INCOME_CATEGORIES: CategoryDef[] = [
-  { id: 'refund', label: 'Remboursement', icon: 'Undo2', color: '#B9DDE0' },
-  { id: 'sales', label: 'Ventes', icon: 'ShoppingBag', color: '#D0DFB8' },
-  { id: 'bonus', label: 'Primes', icon: 'Banknote', color: '#F0E1B5' },
-  { id: 'gifts', label: 'Cadeaux', icon: 'Gift', color: '#E8C4CC' },
-  { id: 'freelance', label: 'Missions', icon: 'Laptop', color: '#C5D7EA' },
-  { id: 'benefits', label: 'Aides', icon: 'HandCoins', color: '#BFE0D5' },
-  { id: 'cashback', label: 'Cashback', icon: 'Coins', color: '#D7CDEF' },
-  { id: 'interest', label: 'Intérêts', icon: 'ChartNoAxesCombined', color: '#C9D0E8' },
-  { id: 'rental', label: 'Loyers', icon: 'House', color: '#E5CCB5' },
-  { id: 'other', label: 'Autre', icon: 'CircleEllipsis', color: '#DADDE2' },
+  {
+    id: 'sales',
+    label: 'Ventes',
+    description: "Leboncoin, Vinted, vente d'objets",
+    icon: 'Tag',
+    color: '#22C55E',
+  },
+  {
+    id: 'refunds',
+    label: 'Remboursements',
+    description: 'Sécu, mutuelle, amis, notes de frais',
+    icon: 'ReceiptText',
+    color: '#10B981',
+  },
+  {
+    id: 'gifts_received',
+    label: 'Cadeaux reçus',
+    description: 'Argent offert, cagnotte, coup de pouce de la famille',
+    icon: 'Gift',
+    color: '#34D399',
+  },
+  {
+    id: 'exceptional',
+    label: 'Rentrées exceptionnelles',
+    description: "Prime ponctuelle, remboursement d'impôt, cashback, jeux",
+    icon: 'Sparkles',
+    color: '#4ADE80',
+  },
+]
+
+export const EXPENSE_CATEGORIES: CategoryDef[] = [
+  {
+    id: 'groceries',
+    label: 'Courses',
+    description: 'Supermarché, marché, boulangerie, drive',
+    icon: 'ShoppingBasket',
+    color: '#F97316',
+  },
+  {
+    id: 'eating_out',
+    label: 'Restos et gourmandises',
+    description: 'Restaurant, café, bar, fast-food, pâtisserie, livraison',
+    icon: 'Coffee',
+    color: '#EC4899',
+  },
+  {
+    id: 'shopping',
+    label: 'Shopping',
+    description: 'Vêtements, chaussures, high-tech, beauté, coiffeur',
+    icon: 'ShoppingBag',
+    color: '#D946EF',
+  },
+  {
+    id: 'leisure',
+    label: 'Loisirs et voyages',
+    description: 'Sorties, cinéma, culture, sport, hobbies, week-ends, vacances',
+    icon: 'Ticket',
+    color: '#F43F5E',
+  },
+  {
+    id: 'transport',
+    label: 'Transport',
+    description: 'Carburant, péage, train, taxi, entretien voiture',
+    icon: 'Car',
+    color: '#3B82F6',
+  },
+  {
+    id: 'health',
+    label: 'Santé',
+    description: 'Médecin, pharmacie, dentiste, optique',
+    icon: 'HeartPulse',
+    color: '#EF4444',
+  },
+  {
+    id: 'loved_ones',
+    label: 'Proches et dons',
+    description: 'Cadeaux, cousinades, fêtes de famille, dons, cagnottes',
+    icon: 'HeartHandshake',
+    color: '#8B5CF6',
+  },
+  {
+    id: 'home',
+    label: 'Maison',
+    description: 'Bricolage, déco, électroménager, jardin, produits ménagers',
+    icon: 'Sofa',
+    color: '#6366F1',
+  },
+  {
+    id: 'unexpected',
+    label: 'Imprévus et frais',
+    description: 'Réparations, amendes, frais bancaires, frais divers',
+    icon: 'TriangleAlert',
+    color: '#EAB308',
+  },
 ]
 
 const ALL = [
   ...RECURRING_INCOME_CATEGORIES,
   ...RECURRING_EXPENSE_CATEGORIES,
-  ...EXPENSE_CATEGORIES,
   ...INCOME_CATEGORIES,
+  ...EXPENSE_CATEGORIES,
 ]
 
 export function getCategory(id: string): CategoryDef {

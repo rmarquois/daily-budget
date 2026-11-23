@@ -79,7 +79,7 @@ function buildDemo() {
         type: 'expense',
         label: 'Électricité',
         frequency: 'monthly',
-        categoryId: 'utilities',
+        categoryId: 'bills_subscriptions',
         amount: 65,
       },
       {
@@ -87,7 +87,7 @@ function buildDemo() {
         type: 'expense',
         label: 'Internet maison',
         frequency: 'monthly',
-        categoryId: 'telecom',
+        categoryId: 'bills_subscriptions',
         amount: 30,
       },
       {
@@ -95,7 +95,7 @@ function buildDemo() {
         type: 'expense',
         label: 'Forfait mobile',
         frequency: 'monthly',
-        categoryId: 'telecom',
+        categoryId: 'bills_subscriptions',
         amount: 15,
       },
       {
@@ -103,7 +103,7 @@ function buildDemo() {
         type: 'expense',
         label: 'Assurance habitation',
         frequency: 'yearly',
-        categoryId: 'insurance',
+        categoryId: 'housing',
         amount: 200,
       },
       {
@@ -111,7 +111,7 @@ function buildDemo() {
         type: 'expense',
         label: 'Mutuelle santé',
         frequency: 'monthly',
-        categoryId: 'health',
+        categoryId: 'health_insurance',
         amount: 40,
       },
       {
@@ -125,14 +125,14 @@ function buildDemo() {
     ] as RecurringItem[],
     transactions: [
       tx(0, 'Boulangerie', 4.6, 'food'),
-      tx(0, 'Café avec Léa', 3.8, 'outings'),
+      tx(0, 'Café avec Léa', 3.8, 'leisure'),
       tx(1, 'Courses Monoprix', 42.15, 'food'),
       tx(1, 'Pass Navigo', 22.8, 'transport'),
       tx(2, 'Cinéma', 12.5, 'leisure'),
-      tx(3, 'Restaurant italien', 28, 'outings'),
+      tx(3, 'Restaurant italien', 28, 'leisure'),
       tx(4, 'Pharmacie', 9.9, 'health'),
-      tx(5, 'Remboursement Tom', 15, 'refund', 'income'),
-      tx(5, 'Livre', 18.9, 'shopping'),
+      tx(5, 'Remboursement Tom', 15, 'refunds', 'income'),
+      tx(5, 'Livre', 18.9, 'leisure'),
     ],
   }
 }

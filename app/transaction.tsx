@@ -118,7 +118,7 @@ export default function TransactionScreen() {
 
         <View className="mt-4">
           <FieldLabel>Catégorie</FieldLabel>
-          <View className="flex-row flex-wrap gap-2">
+          <View className="gap-2">
             {categories.map((c) => (
               <CategoryTag
                 key={c.id}

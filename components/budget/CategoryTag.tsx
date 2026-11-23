@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Pressable } from 'react-native'
+import { Pressable, View } from 'react-native'
 
 import { Text } from '@/components/ui/text'
 import { CategoryDef } from '@/lib/budget/categories'
@@ -13,19 +13,26 @@ interface CategoryTagProps {
 }
 
 export function CategoryTag({ category, activeCategoryId, onPress }: CategoryTagProps) {
+  const selected = activeCategoryId !== undefined && activeCategoryId !== category.id
+
   return (
     <Pressable
       onPress={onPress}
-      style={{ backgroundColor: category.color }}
-      className={cn(
-        'flex-row items-center gap-1.5 rounded-full px-3 py-2',
-        activeCategoryId !== undefined && activeCategoryId !== category.id
-          ? 'opacity-60'
-          : undefined
-      )}
+      className={'border-border flex-row items-center gap-2 rounded border px-3 py-2'}
     >
-      <LucideIcon name={category.icon} size={14} className="text-black" />
-      <Text className="text-sm text-black">{category.label}</Text>
+      <View
+        className={cn(
+          'h-12 w-12 items-center justify-center rounded-full',
+          selected ? 'opacity-50' : undefined
+        )}
+        style={{ backgroundColor: category.color }}
+      >
+        <LucideIcon name={category.icon} size={24} className="text-white" />
+      </View>
+      <View className={cn('flex-1 gap-1', selected ? 'opacity-50' : undefined)}>
+        <Text className="text-foreground text-sm">{category.label}</Text>
+        <Text className="text-foreground text-sm">{category.description}</Text>
+      </View>
     </Pressable>
   )
 }
