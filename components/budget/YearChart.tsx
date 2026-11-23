@@ -4,15 +4,19 @@ import { BarChart, BarChartSeries, CartesianChartTheme } from 'react-native-char
 
 import { Text } from '@/components/ui/text'
 import { fromDayKey, MONTHS_SHORT } from '@/lib/budget/dates'
+import { getPeriod } from '@/lib/budget/engine'
 import { useBudgetOverview, useToday } from '@/lib/budget/hooks'
+import { useBudgetStore } from '@/lib/budget/store'
 import { type Transaction } from '@/lib/budget/types'
 
 export function YearChart({
+  currentYear,
   transactions,
   onSelect,
   width,
   theme,
 }: {
+  currentYear: number
   transactions: Transaction[]
   onSelect: (month: number | undefined, budget: boolean) => void
   width: number
@@ -20,19 +24,20 @@ export function YearChart({
 }) {
   const today = useToday()
   const todayMonth = fromDayKey(today).getMonth()
+
+  const periodStartDay = useBudgetStore((s) => s.periodStartDay)
+
   const { summary } = useBudgetOverview(today)
 
   const data = React.useMemo(() => {
     return Array.from({ length: 12 }, (_, index) => index).map((index) => {
-      transactions.filter((transaction) => {
-        return fromDayKey(transaction.date).getMonth() === index
-      })
+      const period = getPeriod(`${currentYear}-${index + 1}-01`, periodStartDay)
 
       return {
         month: MONTHS_SHORT[index],
         spent: transactions
           .filter((transaction) => {
-            return fromDayKey(transaction.date).getMonth() === index
+            return transaction.date >= period.start && transaction.date <= period.end
           })
           .reduce((sum, transaction) => {
             return sum + transaction.amount * (transaction.type === 'expense' ? 1 : -1)
@@ -77,7 +82,6 @@ export function YearChart({
             },
           }}
           legend={false}
-          showValuesOnTopOfBars
           theme={theme}
         />
       )}

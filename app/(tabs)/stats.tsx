@@ -103,6 +103,7 @@ export default function StatsScreen() {
             <>
               <SectionTitle title="Votre année en chiffres" />
               <YearChart
+                currentYear={currentYear}
                 transactions={transactionsForYear}
                 onSelect={(month, budget) => {
                   setSelectedMonth(month)
@@ -112,15 +113,15 @@ export default function StatsScreen() {
                 theme={chartTheme}
               />
             </>
-            {selectedMonth !== undefined && (
+            {selectedMonth !== undefined && transactionsForPeriod.length > 0 && (
               <>
-                <SectionTitle title="Répartition des dépenses du mois" />
+                <SectionTitle title="Répartition des dépenses de la période" />
                 <PeriodChart
                   transactions={transactionsForPeriod.filter((t) => t.type === 'expense')}
                   width={chartWidth}
                   theme={chartTheme}
                 />
-                <SectionTitle title="Répartition des revenus du mois" />
+                <SectionTitle title="Répartition des revenus de la période" />
                 <PeriodChart
                   transactions={transactionsForPeriod.filter((t) => t.type === 'income')}
                   width={chartWidth}
@@ -128,15 +129,15 @@ export default function StatsScreen() {
                 />
               </>
             )}
-            {budgetSelected && (
+            {budgetSelected && recurring.length > 0 && (
               <>
-                <SectionTitle title="Répartition du budget (dépenses)" />
+                <SectionTitle title="Répartition des dépenses du budget" />
                 <BudgetChart
                   recurring={recurring.filter((r) => r.type === 'expense')}
                   width={chartWidth}
                   theme={chartTheme}
                 />
-                <SectionTitle title="Répartition du budget (revenus)" />
+                <SectionTitle title="Répartition des revenus du budget" />
                 <BudgetChart
                   recurring={recurring.filter((r) => r.type === 'income')}
                   width={chartWidth}
